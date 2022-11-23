@@ -4,7 +4,7 @@ import PrimaryButton from "../../components/PrimaryButton";
 
 const Banner = () => {
   return (
-    <div className="max-w-[1400px] mx-auto">
+    <div className="w-11/12 max-w-[1400px] mx-auto">
       <div
         className="h-[460px]"
         style={{

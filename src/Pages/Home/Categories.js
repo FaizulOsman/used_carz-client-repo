@@ -5,7 +5,7 @@ import teslaLogo from "../../assets/images/teslaLogo.png";
 
 const Categories = () => {
   return (
-    <div className="max-w-[1400px] mx-auto mt-20">
+    <div className="w-11/12 max-w-[1400px] mx-auto mt-20">
       <h2 className="text-center text-4xl font-bold mb-10 text-secondary">
         Categories
       </h2>

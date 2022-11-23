@@ -68,7 +68,7 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center pt-8">
-      <div className="flex flex-col max-w-xl p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
+      <div className="flex flex-col max-w-xl p-6 border-2 rounded-lg sm:p-10 text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold text-primary">Signup</h1>
           <p className="text-sm text-gray-400">Create a new account</p>
@@ -89,7 +89,7 @@ const Register = () => {
                 id="name"
                 required
                 placeholder="Enter Your Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
               />
             </div>
@@ -114,7 +114,7 @@ const Register = () => {
                 name="email"
                 id="email"
                 placeholder="Enter Your Email Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-green-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-primary bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
                 required
               />
@@ -130,7 +130,7 @@ const Register = () => {
                 name="password"
                 id="password"
                 placeholder="Enter Your Password Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-200 focus:outline-green-500 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-200 focus:outline-primary text-gray-900"
                 required
               />
             </div>
@@ -154,9 +154,7 @@ const Register = () => {
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
-          <p className="px-3 text-sm dark:text-gray-400">
-            Signup with social accounts
-          </p>
+          <p className="px-3 text-sm dark:text-gray-400">Social Login</p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
         <div className="flex justify-center space-x-4">
@@ -184,8 +182,8 @@ const Register = () => {
           </button>
         </div>
         <p className="px-6 text-sm text-center text-gray-400">
-          Already have an account yet?{" "}
-          <Link to="/login" className="hover:underline text-gray-600">
+          Already have an account?{" "}
+          <Link to="/login" className="hover:underline text-primary">
             Sign In
           </Link>
           .
