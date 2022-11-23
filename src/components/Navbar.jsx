@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
+import logo from "../assets/images/logo.png";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -18,7 +19,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/"
-          className="text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
+          className="hover:text-primary text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
         >
           <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
             Home
@@ -30,7 +31,7 @@ const Navbar = () => {
           <li>
             <Link
               onClick={handleLogOut}
-              className="text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
+              className="hover:text-primary text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
             >
               <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
                 Log Out
@@ -43,7 +44,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/login"
-              className="text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
+              className="hover:text-primary text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
             >
               <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
                 Login
@@ -55,7 +56,7 @@ const Navbar = () => {
       <li>
         <Link
           to="/blog"
-          className="text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
+          className="hover:text-primary text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
         >
           <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
             Blog
@@ -66,12 +67,15 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-secondary text-white">
-      <div className="w-11/12 mx-auto border-b-2">
+    <div className="bg-secondary">
+      <div className="w-11/12 mx-auto ">
         <div className="navbar p-0">
           <div className="navbar-start">
             <div className="dropdown">
-              <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              <label
+                tabIndex={0}
+                className="btn btn-ghost lg:hidden text-primary"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
@@ -95,32 +99,48 @@ const Navbar = () => {
               </ul>
             </div>
             <Link className="btn btn-ghost normal-case text-xl">
-              {/* <img className="h-full" src={logo} alt="" /> */}
+              <img className="h-full" src={logo} alt="" />
               <span className="ml-2 fontNothingYouCouldDo text-primary font-semibold">
                 Used-carz
               </span>
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu-horizontal p-0">{menuItems}</ul>
+            <ul className="menu-horizontal p-0 text-white">{menuItems}</ul>
           </div>
           <div className="navbar-end">
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  {/* {user?.photoURL ? (
-                  <img
-                    src={user?.photoURL}
-                    title={user?.uid ? `${user?.email}` : `User name not found`}
-                    alt="img"
-                  />
-                ) : (
-                  <FontAwesomeIcon
-                    className="h-full"
-                    icon={faUser}
-                  ></FontAwesomeIcon>
-                )} */}
-                  userImg
+                <div className="w-10 border border-primary rounded-full">
+                  {user?.photoURL ? (
+                    <img
+                      src={user?.photoURL}
+                      title={
+                        user?.uid ? `${user?.email}` : `User name not found`
+                      }
+                      alt="img"
+                    />
+                  ) : (
+                    <div className="mt-2 flex justify-center text-primary">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="feather feather-users "
+                      >
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                      </svg>
+                    </div>
+                  )}
                 </div>
               </label>
               <ul
