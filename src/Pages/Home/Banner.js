@@ -36,14 +36,14 @@ const Banner = () => {
             <option>BMW</option>
             <option>Tesla</option>
           </select>
-          <select className="select select-bordered w-full">
-            <option disabled>Select a Model</option>
+          <select disabled className="select select-bordered w-full">
+            <option>Select a Model</option>
             <option>Han Solo</option>
             <option>Greedo</option>
           </select>
           <input
             type="text"
-            placeholder="Type here"
+            placeholder="Zip Code"
             className="input input-bordered w-full"
           />
           <PrimaryButton classes="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100">
