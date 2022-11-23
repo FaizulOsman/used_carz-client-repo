@@ -4,12 +4,13 @@ import PrimaryButton from "../../components/PrimaryButton";
 
 const Banner = () => {
   return (
-    <div className="w-11/12 mx-auto">
+    <div className="max-w-[1400px] mx-auto">
       <div
         className="h-[460px]"
         style={{
           background: `url(${bannerImg})`,
           backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
         <h3
@@ -24,7 +25,7 @@ const Banner = () => {
       </div>
 
       <div className="border-4 bg-base-100 mt-10 lg:-mt-24 lg:w-8/12 mx-auto rounded-lg p-10">
-        <h3 className="text-3xl font-semibold text-center text-secondary">
+        <h3 className="text-3xl font-semibold text-center text-primary">
           Tell us what you're looking for
         </h3>
 
