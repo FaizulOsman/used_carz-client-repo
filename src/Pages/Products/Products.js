@@ -66,10 +66,6 @@ const Products = () => {
                 <span className="font-semibold">Resale Price: </span>
                 <span>${product?.resalePrice}</span>
               </p>
-              <p>
-                <span className="font-semibold">Years of use: </span>
-                <span>{product?.yearsOfUse}y</span>
-              </p>
               <div className="card-actions justify-between mt-3">
                 <div>
                   <h4 className="text-md font-semibold">
