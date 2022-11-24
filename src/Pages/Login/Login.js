@@ -23,9 +23,27 @@ const Login = () => {
     // Log In With Email and Password
     logIn(email, password)
       .then((result) => {
-        toast.success("Successfully logged in");
-        navigate(from, { replace: true });
-        form.reset();
+        const user = result.user;
+        const currentUser = { email: user.email };
+
+        // set JWT token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // set token in local storage
+            localStorage.setItem("accessToken", data.token);
+            toast.success("Successfully logged in");
+            navigate(from, { replace: true });
+            form.reset();
+            setLoading(false);
+          });
       })
       .catch((e) => {
         console.log(e);
@@ -37,13 +55,33 @@ const Login = () => {
   // Google Log In
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then(() => {
-        toast.success("Successfully signed in with google");
-        navigate(from, { replace: true });
+      .then((result) => {
+        const user = result.user;
+        const currentUser = { email: user.email };
+
+        // set JWT token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // set token in local storage
+            localStorage.setItem("accessToken", data.token);
+            toast.success("Successfully signed in with google");
+            navigate(from, { replace: true });
+            navigate(from, { replace: true });
+          });
+        setLoading(false);
       })
       .catch((e) => {
         console.log(e);
         toast.error(e.message);
+        setLoading(false);
       });
   };
 
