@@ -32,7 +32,6 @@ const BookingModal = ({ setProduct, product, refetch }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.acknowledged) {
           setProduct(null);
           toast.success("Booking confirmed");
