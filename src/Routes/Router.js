@@ -9,6 +9,7 @@ import MyOrders from "../Pages/Dashboard/MyOrders";
 import ReportedItems from "../Pages/Dashboard/ReportedItems";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
+import MyProducts from "../Pages/MyProducts/MyProducts";
 import Products from "../Pages/Products/Products";
 import Register from "../Pages/Register/Register";
 import AdminRoute from "./AdminRoute";
@@ -29,6 +30,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Products></Products>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/myproducts",
+        element: (
+          <PrivateRoute>
+            <MyProducts></MyProducts>
           </PrivateRoute>
         ),
       },

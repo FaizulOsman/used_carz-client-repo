@@ -26,18 +26,19 @@ const Navbar = () => {
           </span>
         </Link>
       </li>
+
+      <li>
+        <Link
+          to="/blog"
+          className="hover:text-primary text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
+        >
+          <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
+            Blog
+          </span>
+        </Link>
+      </li>
       {user?.uid ? (
         <>
-          <li>
-            <Link
-              onClick={handleLogOut}
-              className="hover:text-primary text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
-            >
-              <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
-                Log Out
-              </span>
-            </Link>
-          </li>
           <li>
             <Link
               to="/dashboard"
@@ -45,6 +46,26 @@ const Navbar = () => {
             >
               <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
                 Dashboard
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/myproducts"
+              className="hover:text-primary text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
+            >
+              <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
+                My Products
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              onClick={handleLogOut}
+              className="hover:text-primary text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
+            >
+              <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
+                Log Out
               </span>
             </Link>
           </li>
@@ -63,17 +84,6 @@ const Navbar = () => {
           </li>
         </>
       )}
-
-      <li>
-        <Link
-          to="/blog"
-          className="hover:text-primary text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
-        >
-          <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
-            Blog
-          </span>
-        </Link>
-      </li>
     </>
   );
 

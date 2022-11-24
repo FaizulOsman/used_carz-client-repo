@@ -20,7 +20,7 @@ const Products = () => {
   });
 
   return (
-    <div className="w-11/12 max-w-[1400px] mx-auto mt-20">
+    <div className="w-11/12 max-w-[1400px] mx-auto my-20">
       <h2 className="mb-10 text-4xl font-bold text-center text-secondary">
         Products
       </h2>
@@ -46,26 +46,33 @@ const Products = () => {
                   Book Now
                 </label>
               </div>
-              <p>
-                <span className="font-semibold">Location: </span>
-                <span>{product?.location}</span>
-              </p>
-              <p>
-                <span className="font-semibold">Condition: </span>
-                <span>{product?.condition}</span>
-              </p>
-              <p>
-                <span className="font-semibold">Years of use: </span>
-                <span>{product?.yearsOfUse}y</span>
-              </p>
-              <p>
-                <span className="font-semibold">Original Price: </span>
-                <span>${product?.originalPrice}</span>
-              </p>
-              <p>
-                <span className="font-semibold">Resale Price: </span>
-                <span>${product?.resalePrice}</span>
-              </p>
+              <div className="mb-2">
+                <p className="text-gray-500 text-justify">
+                  {product?.description}
+                </p>
+              </div>
+              <div className="grid grid-cols-2">
+                <p>
+                  <span className="font-semibold">Location: </span>
+                  <span>{product?.location}</span>
+                </p>
+                <p>
+                  <span className="font-semibold">Condition: </span>
+                  <span>{product?.condition}</span>
+                </p>
+                <p>
+                  <span className="font-semibold">Years of use: </span>
+                  <span>{product?.yearsOfUse}y</span>
+                </p>
+                <p>
+                  <span className="font-semibold">Original Price: </span>
+                  <span>${product?.originalPrice}</span>
+                </p>
+                <p>
+                  <span className="font-semibold">Resale Price: </span>
+                  <span>${product?.resalePrice}</span>
+                </p>
+              </div>
               <div className="card-actions justify-between mt-3">
                 <div>
                   <h4 className="text-md font-semibold">
