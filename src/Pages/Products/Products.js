@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import ProsAndCons from "../../assets/images/pros-and-cons.png";
 
 const Products = () => {
   const location = useLocation();
@@ -18,24 +17,32 @@ const Products = () => {
     },
   });
 
-  console.log(products);
-
   return (
     <div className="w-11/12 max-w-[1400px] mx-auto mt-20">
       <h2 className="mb-10 text-4xl font-bold text-center text-secondary">
         Products
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
         {products?.map((product) => (
           <div key={product?._id} className="card bg-base-100 shadow-xl">
             <figure>
-              <img src={product?.img} alt="Shoes" />
+              <img
+                className="w-full h-[280px]"
+                src={product?.img}
+                alt="Shoes"
+              />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">
-                {product?.productName}
-                <div className="badge badge-secondary">NEW</div>
-              </h2>
+              <div className="flex justify-between items-center mb-3">
+                <h2 className="card-title">{product?.productName}</h2>
+                <Link className="badge py-3 badge-outline btn-primary text-white">
+                  Book Now
+                </Link>
+              </div>
+              <p>
+                <span className="font-semibold">Location: </span>
+                <span>{product?.location}</span>
+              </p>
               <p>
                 <span className="font-semibold">Condition: </span>
                 <span>{product?.condition}</span>
@@ -56,22 +63,25 @@ const Products = () => {
                 <span className="font-semibold">Years of use: </span>
                 <span>{product?.yearsOfUse}y</span>
               </p>
-              <div className="card-actions justify-between">
+              <div className="card-actions justify-between mt-3">
                 <div>
                   <h4 className="text-md font-semibold">
                     {product.sellerName}
-                    <FontAwesomeIcon
-                      className="text-primary w-3 ml-1"
-                      icon={faCircleCheck}
-                    ></FontAwesomeIcon>
+                    {product?.isVerified && (
+                      <FontAwesomeIcon
+                        className="text-primary w-3 ml-1"
+                        icon={faCircleCheck}
+                      ></FontAwesomeIcon>
+                    )}
                   </h4>
                   <p>
                     <small>{product?.mobile}</small>
                   </p>
                 </div>
-                <Link className="badge badge-outline btn-primary text-white">
-                  Wishlist
-                </Link>
+                <div>
+                  <p>Date: {product?.postedDate}</p>
+                  <p>Time: {product?.postedTime}</p>
+                </div>
               </div>
             </div>
           </div>
