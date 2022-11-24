@@ -101,7 +101,7 @@ const Navbar = () => {
             <Link className="btn btn-ghost normal-case text-xl">
               <img className="h-full" src={logo} alt="" />
               <span className="ml-2 fontNothingYouCouldDo text-primary font-semibold">
-                Used-carz
+                Used Carz
               </span>
             </Link>
           </div>
