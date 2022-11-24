@@ -1,8 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import lamborghiniLogo from "../../assets/images/lamborghiniLogo.png";
-import porscheLogo from "../../assets/images/porscheLogo.png";
-import teslaLogo from "../../assets/images/teslaLogo.png";
 
 const Categories = () => {
   const { data: categories = [] } = useQuery({
@@ -29,25 +26,6 @@ const Categories = () => {
             </h4>
           </div>
         ))}
-
-        <div className="p-8 border rounded-lg shadow-xl hover:bg-base-200 duration-300">
-          <img className="w-full h-56" src={lamborghiniLogo} alt="" />
-          <h4 className="text-xl font-semibold text-primary text-center">
-            Lamborghini Certified
-          </h4>
-        </div>
-        <div className="p-8 border rounded-lg shadow-xl hover:bg-base-200 duration-300">
-          <img className="w-full h-56" src={porscheLogo} alt="" />
-          <h4 className="text-xl font-semibold text-primary text-center">
-            Porsche Certified
-          </h4>
-        </div>
-        <div className="p-8 border rounded-lg shadow-xl hover:bg-base-200 duration-300">
-          <img className="w-full h-56" src={teslaLogo} alt="" />
-          <h4 className="text-xl font-semibold text-primary text-center">
-            Tesla Certified
-          </h4>
-        </div>
       </div>
     </div>
   );
