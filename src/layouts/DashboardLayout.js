@@ -27,7 +27,7 @@ const DashboardLayout = () => {
             {/* <!-- Sidebar content here --> */}
             <li>
               <Link to="/dashboard" className="hover:bg-primary">
-                My Books
+                My Orders
               </Link>
             </li>
             {isAdmin && (
@@ -38,8 +38,16 @@ const DashboardLayout = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/adddoctor" className="hover:bg-primary">
+                  <Link to="/dashboard/addproduct" className="hover:bg-primary">
                     Add A Product
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/reporteditems"
+                    className="hover:bg-primary"
+                  >
+                    Reported Items
                   </Link>
                 </li>
               </>
