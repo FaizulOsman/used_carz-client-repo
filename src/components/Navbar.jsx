@@ -38,6 +38,16 @@ const Navbar = () => {
               </span>
             </Link>
           </li>
+          <li>
+            <Link
+              to="/dashboard"
+              className="hover:text-primary text-md p-3 font-semibold group transition-all duration-300 ease-in-out"
+            >
+              <span className="bg-left-bottom bg-gradient-to-r from-primary to-cyan-300 bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 ease-out">
+                Dashboard
+              </span>
+            </Link>
+          </li>
         </>
       ) : (
         <>
@@ -53,6 +63,7 @@ const Navbar = () => {
           </li>
         </>
       )}
+
       <li>
         <Link
           to="/blog"

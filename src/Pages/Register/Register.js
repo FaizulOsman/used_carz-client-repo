@@ -21,6 +21,7 @@ const Register = () => {
     const image = form.image.files[0];
     const email = form.email.value;
     const password = form.password.value;
+    const acting = form.acting.value;
 
     // SetUp for image upload
     const formData = new FormData();
@@ -33,6 +34,7 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         const imageURL = data.data.display_url;
+        const userDetails = { name, email, image: imageURL, acting };
 
         // Create User
         createUser(email, password)
@@ -40,6 +42,7 @@ const Register = () => {
             // Update User (Name, Image)
             updateUserProfile(name, imageURL)
               .then(() => {
+                saveUser(userDetails);
                 toast.success("Successfully Registered");
                 navigate(from, { replace: true });
               })
@@ -53,12 +56,34 @@ const Register = () => {
       .catch((e) => toast.error(e.message));
   };
 
+  // Save user in database
+  const saveUser = ({ name, email, image, acting }) => {
+    const user = { name, email, image, acting };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   // Google Log In
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
         const currentUser = { email: user.email };
+        const userDetails = {
+          name: user?.displayName,
+          email: user?.email,
+          image: user?.photoURL,
+          acting: "Buyer",
+        };
 
         // set JWT token
         fetch("http://localhost:5000/jwt", {
@@ -71,10 +96,10 @@ const Register = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+            saveUser(userDetails);
             // set token in local storage
             localStorage.setItem("accessToken", data.token);
             toast.success("Successfully signed in with google");
-            navigate(from, { replace: true });
             navigate(from, { replace: true });
           });
         setLoading(false);
@@ -128,6 +153,15 @@ const Register = () => {
                 ccept="image/*"
                 required
               />
+            </div>
+            <div>
+              <label htmlFor="acting" className="block mb-2 text-sm">
+                Acting as seller/buyer
+              </label>
+              <select name="acting" className="select select-bordered w-full">
+                <option value="Buyer">Buyer</option>
+                <option value="Seller">Seller</option>
+              </select>
             </div>
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
