@@ -1,14 +1,16 @@
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import BookingModal from "./BookingModal";
 
 const Products = () => {
   const location = useLocation();
   const id = location?.pathname.split("/category/")[1];
+  const [product, setProduct] = useState(null);
 
-  const { data: products = [] } = useQuery({
+  const { data: products = [], refetch } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/category/${id}`);
@@ -35,9 +37,14 @@ const Products = () => {
             <div className="card-body">
               <div className="flex justify-between items-center mb-3">
                 <h2 className="card-title">{product?.productName}</h2>
-                <Link className="badge py-3 badge-outline btn-primary text-white">
+
+                <label
+                  onClick={() => setProduct(product)}
+                  htmlFor="booking-modal"
+                  className="badge py-3 badge-outline btn-primary text-white"
+                >
                   Book Now
-                </Link>
+                </label>
               </div>
               <p>
                 <span className="font-semibold">Location: </span>
@@ -87,6 +94,13 @@ const Products = () => {
           </div>
         ))}
       </div>
+      {product && (
+        <BookingModal
+          refetch={refetch}
+          setProduct={setProduct}
+          product={product}
+        ></BookingModal>
+      )}
     </div>
   );
 };
