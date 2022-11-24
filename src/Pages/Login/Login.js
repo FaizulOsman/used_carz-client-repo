@@ -37,6 +37,7 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
             // set token in local storage
             localStorage.setItem("accessToken", data.token);
             toast.success("Successfully logged in");
@@ -186,7 +187,11 @@ const Login = () => {
             </svg>
           </button>
 
-          <button aria-label="Log in with GitHub" className="p-3 rounded-sm">
+          <button
+            // onClick={handleGithubSignIn}
+            aria-label="Log in with GitHub"
+            className="p-3 rounded-sm"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
