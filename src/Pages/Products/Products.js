@@ -2,7 +2,7 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import BookingModal from "./BookingModal";
 
 const Products = () => {
@@ -51,27 +51,31 @@ const Products = () => {
                   {product?.description}
                 </p>
               </div>
-              <div className="grid grid-cols-2">
-                <p>
-                  <span className="font-semibold">Location: </span>
-                  <span>{product?.location}</span>
-                </p>
-                <p>
-                  <span className="font-semibold">Condition: </span>
-                  <span>{product?.condition}</span>
-                </p>
-                <p>
-                  <span className="font-semibold">Years of use: </span>
-                  <span>{product?.yearsOfUse}y</span>
-                </p>
-                <p>
-                  <span className="font-semibold">Original Price: </span>
-                  <span>${product?.originalPrice}</span>
-                </p>
-                <p>
-                  <span className="font-semibold">Resale Price: </span>
-                  <span>${product?.resalePrice}</span>
-                </p>
+              <div className="card-actions justify-between mt-2">
+                <div>
+                  <p>
+                    <span className="font-semibold">Location: </span>
+                    <span>{product?.location}</span>
+                  </p>
+                  <p>
+                    <span className="font-semibold">Condition: </span>
+                    <span>{product?.condition}</span>
+                  </p>
+                  <p>
+                    <span className="font-semibold">Years of use: </span>
+                    <span>{product?.yearsOfUse}y</span>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <span className="font-semibold">Original Price: </span>
+                    <span>${product?.originalPrice}</span>
+                  </p>
+                  <p>
+                    <span className="font-semibold">Resale Price: </span>
+                    <span>${product?.resalePrice}</span>
+                  </p>
+                </div>
               </div>
               <div className="card-actions justify-between mt-3">
                 <div>
