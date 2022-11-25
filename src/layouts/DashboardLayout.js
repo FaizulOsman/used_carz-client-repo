@@ -4,10 +4,12 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { AuthContext } from "../contexts/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
+import useSeller from "../hooks/useSeller";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
+  const [isSeller] = useSeller(user?.email);
 
   return (
     <div>
@@ -30,16 +32,20 @@ const DashboardLayout = () => {
                 My Orders
               </Link>
             </li>
-            <li>
-              <Link to="/dashboard/myproducts" className="hover:bg-primary">
-                My Products
-              </Link>
-            </li>
-            <li>
-              <Link to="/dashboard/addproduct" className="hover:bg-primary">
-                Add A Product
-              </Link>
-            </li>
+            {isSeller && (
+              <>
+                <li>
+                  <Link to="/dashboard/myproducts" className="hover:bg-primary">
+                    My Products
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/addproduct" className="hover:bg-primary">
+                    Add A Product
+                  </Link>
+                </li>
+              </>
+            )}
             {isAdmin && (
               <>
                 <li>

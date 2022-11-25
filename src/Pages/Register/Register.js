@@ -159,8 +159,8 @@ const Register = () => {
                 Acting as seller/buyer
               </label>
               <select name="acting" className="select select-bordered w-full">
-                <option value="Buyer">Buyer</option>
-                <option value="Seller">Seller</option>
+                <option value="buyer">Buyer</option>
+                <option value="seller">Seller</option>
               </select>
             </div>
             <div>
