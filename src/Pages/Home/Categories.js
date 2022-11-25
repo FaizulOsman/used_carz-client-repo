@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Categories = () => {
-  const { data: categories = [] } = useQuery({
-    queryKey: ["categories"],
-    queryFn: () =>
-      fetch(`http://localhost:5000/categories`).then((res) => res.json()),
-  });
-  console.log(categories);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/categories").then((data) => {
+      setCategories(data.data);
+    });
+  }, []);
 
   return (
     <div className="w-11/12 max-w-[1400px] mx-auto mt-20">
