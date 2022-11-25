@@ -36,15 +36,25 @@ const Products = () => {
             </figure>
             <div className="card-body">
               <div className="flex justify-between items-center mb-3">
-                <h2 className="card-title">{product?.productName}</h2>
-
-                <label
-                  onClick={() => setProduct(product)}
-                  htmlFor="booking-modal"
-                  className="badge py-3 badge-outline btn-primary text-white"
-                >
-                  Book Now
-                </label>
+                <div>
+                  {product?.status === "sold" ? (
+                    <div className="badge badge-error text-white">Sold</div>
+                  ) : (
+                    <div className="badge badge-accent text-white">
+                      Available
+                    </div>
+                  )}
+                  <h2 className="card-title">{product?.productName}</h2>
+                </div>
+                {product?.status !== "sold" && (
+                  <label
+                    onClick={() => setProduct(product)}
+                    htmlFor="booking-modal"
+                    className="badge py-3 badge-outline btn-primary text-white"
+                  >
+                    Book Now
+                  </label>
+                )}
               </div>
               <div className="mb-2">
                 <p className="text-gray-500 text-justify">

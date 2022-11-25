@@ -22,6 +22,7 @@ const MyOrders = () => {
   });
   console.log(bookings);
 
+  // Delete Operation for My Orders
   const handleDelete = (booking) => {
     const isConfirm = window.confirm(
       `Do you want to delete "${booking?.productName}"?`
