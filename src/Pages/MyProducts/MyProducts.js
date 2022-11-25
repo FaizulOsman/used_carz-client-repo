@@ -63,7 +63,7 @@ const MyProducts = () => {
   };
 
   return (
-    <div className="my-10">
+    <div className="my-10 w-11/12 max-w-[1400px] mx-auto">
       <div className="p-10">
         <h2 className="text-3xl mb-10 font-semibold text-primary text-center">
           My Products

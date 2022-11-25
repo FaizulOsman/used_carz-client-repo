@@ -28,6 +28,25 @@ const AllUsers = () => {
       });
   };
 
+  const handleDelete = (user) => {
+    const isConfirm = window.confirm(`Do you want to delete "${user?.name}"?`);
+    if (isConfirm) {
+      fetch(`http://localhost:5000/users/${user?._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            toast.success(`${user?.name} deleted successfully`);
+            refetch();
+          }
+        });
+    }
+  };
+
   return (
     <div className="p-10">
       <h3 className="text-3xl mb-5 font-semibold text-primary">All Users</h3>
@@ -61,7 +80,12 @@ const AllUsers = () => {
                   )}
                 </td>
                 <td>
-                  <button className="btn btn-xs">Delete</button>
+                  <button
+                    onClick={() => handleDelete(user)}
+                    className="btn btn-xs"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
