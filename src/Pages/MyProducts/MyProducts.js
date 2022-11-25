@@ -45,8 +45,26 @@ const MyProducts = () => {
   };
 
   // Update Operation for My Orders
-  const handleStatus = (product) => {
-    fetch(`http://localhost:5000/products/${product?._id}`, {
+  const handleSoldStatus = (product) => {
+    fetch(`http://localhost:5000/products/sold/${product?._id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          toast.success("Status Updated successfully");
+          refetch();
+        }
+      });
+  };
+
+  // Update Operation for My Orders
+  const handleAvailableStatus = (product) => {
+    fetch(`http://localhost:5000/products/available/${product?._id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -91,10 +109,15 @@ const MyProducts = () => {
                   <td>{product?.mobile}</td>
                   <td>
                     {product?.status === "sold" ? (
-                      "Not Available"
+                      <label
+                        onClick={() => handleAvailableStatus(product)}
+                        className="badge py-3 badge-outline bg-primary hover:bg-secondary text-white"
+                      >
+                        Available
+                      </label>
                     ) : (
                       <label
-                        onClick={() => handleStatus(product)}
+                        onClick={() => handleSoldStatus(product)}
                         className="badge py-3 badge-outline bg-primary hover:bg-secondary text-white"
                       >
                         Sold

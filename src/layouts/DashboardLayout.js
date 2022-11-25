@@ -30,6 +30,16 @@ const DashboardLayout = () => {
                 My Orders
               </Link>
             </li>
+            <li>
+              <Link to="/dashboard/myproducts" className="hover:bg-primary">
+                My Products
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard/addproduct" className="hover:bg-primary">
+                Add A Product
+              </Link>
+            </li>
             {isAdmin && (
               <>
                 <li>
@@ -37,11 +47,7 @@ const DashboardLayout = () => {
                     All users
                   </Link>
                 </li>
-                <li>
-                  <Link to="/dashboard/addproduct" className="hover:bg-primary">
-                    Add A Product
-                  </Link>
-                </li>
+
                 <li>
                   <Link
                     to="/dashboard/reporteditems"

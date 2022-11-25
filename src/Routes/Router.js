@@ -5,6 +5,7 @@ import Main from "../layouts/Main";
 import Blog from "../Pages/Blogs/Blog";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import AllUsers from "../Pages/Dashboard/AllUsers";
+import MyBuyers from "../Pages/Dashboard/MyBuyers";
 import MyOrders from "../Pages/Dashboard/MyOrders";
 import ReportedItems from "../Pages/Dashboard/ReportedItems";
 import Home from "../Pages/Home/Home";
@@ -30,14 +31,6 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Products></Products>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/myproducts",
-        element: (
-          <PrivateRoute>
-            <MyProducts></MyProducts>
           </PrivateRoute>
         ),
       },
@@ -76,6 +69,14 @@ export const router = createBrowserRouter([
             <ReportedItems></ReportedItems>
           </AdminRoute>
         ),
+      },
+      {
+        path: "/dashboard/mybuyers",
+        element: <MyBuyers></MyBuyers>,
+      },
+      {
+        path: "/dashboard/myproducts",
+        element: <MyProducts></MyProducts>,
       },
     ],
   },

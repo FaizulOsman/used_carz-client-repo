@@ -2,7 +2,8 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import ReportModal from "../../components/ReportModal";
 import BookingModal from "./BookingModal";
 
 const Products = () => {
@@ -46,15 +47,10 @@ const Products = () => {
                   )}
                   <h2 className="card-title">{product?.productName}</h2>
                 </div>
-                {product?.status !== "sold" && (
-                  <label
-                    onClick={() => setProduct(product)}
-                    htmlFor="booking-modal"
-                    className="badge py-3 badge-outline btn-primary text-white"
-                  >
-                    Book Now
-                  </label>
-                )}
+                <div className="text-sm">
+                  <p>Date: {product?.postedDate}</p>
+                  <p>Time: {product?.postedTime}</p>
+                </div>
               </div>
               <div className="mb-2">
                 <p className="text-gray-500 text-justify">
@@ -103,8 +99,26 @@ const Products = () => {
                   </p>
                 </div>
                 <div>
-                  <p>Date: {product?.postedDate}</p>
-                  <p>Time: {product?.postedTime}</p>
+                  <div>
+                    <label
+                      onClick={() => setProduct(product)}
+                      htmlFor="report-modal"
+                      className="badge badge-error hover:bg-red-600 text-white mb-1"
+                    >
+                      Report
+                    </label>
+                    <div>
+                      {product?.status !== "sold" && (
+                        <label
+                          onClick={() => setProduct(product)}
+                          htmlFor="booking-modal"
+                          className="badge py-3 badge-outline btn-primary text-white"
+                        >
+                          Book Now
+                        </label>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -117,6 +131,13 @@ const Products = () => {
           setProduct={setProduct}
           product={product}
         ></BookingModal>
+      )}
+      {product && (
+        <ReportModal
+          refetch={refetch}
+          setProduct={setProduct}
+          product={product}
+        ></ReportModal>
       )}
     </div>
   );
