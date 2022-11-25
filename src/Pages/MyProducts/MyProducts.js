@@ -22,7 +22,6 @@ const MyProducts = () => {
       return data;
     },
   });
-  console.log(products);
 
   // Delete Operation for My Orders
   const handleDelete = (product) => {
@@ -122,7 +121,7 @@ const MyProducts = () => {
                         ) : (
                           <label
                             onClick={() => handleSoldStatus(product)}
-                            className="badge py-3 badge-outline bg-primary hover:bg-secondary text-white"
+                            className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
                           >
                             Sold
                           </label>

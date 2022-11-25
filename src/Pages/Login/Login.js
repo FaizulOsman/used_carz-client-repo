@@ -53,12 +53,34 @@ const Login = () => {
       });
   };
 
+  // Save user in database
+  const saveUser = ({ name, email, image, acting }) => {
+    const user = { name, email, image, acting };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   // Google Log In
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
         const currentUser = { email: user.email };
+        const userDetails = {
+          name: user?.displayName,
+          email: user?.email,
+          image: user?.photoURL,
+          acting: "Buyer",
+        };
 
         // set JWT token
         fetch("http://localhost:5000/jwt", {
@@ -71,10 +93,10 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
+            saveUser(userDetails);
             // set token in local storage
             localStorage.setItem("accessToken", data.token);
             toast.success("Successfully signed in with google");
-            navigate(from, { replace: true });
             navigate(from, { replace: true });
           });
         setLoading(false);

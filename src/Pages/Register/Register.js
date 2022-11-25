@@ -90,7 +90,7 @@ const Register = () => {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
           },
           body: JSON.stringify(currentUser),
         })

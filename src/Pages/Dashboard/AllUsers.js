@@ -13,19 +13,22 @@ const AllUsers = () => {
   });
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
-          toast.success("Make admin successful");
-          refetch();
-        }
-      });
+    const confirm = window.confirm("Are you sure to make a user admin?");
+    if (confirm) {
+      fetch(`http://localhost:5000/users/admin/${id}`, {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.modifiedCount) {
+            toast.success("Make admin successful");
+            refetch();
+          }
+        });
+    }
   };
 
   const handleDelete = (user) => {
@@ -71,7 +74,7 @@ const AllUsers = () => {
                   {user?.acting !== "admin" ? (
                     <button
                       onClick={() => handleMakeAdmin(user?._id)}
-                      className="btn btn-xs btn-primary"
+                      className="btn btn-xs btn-primary text-white"
                     >
                       Make Admin
                     </button>
