@@ -13,6 +13,7 @@ const AddProduct = () => {
     const image = form.image.files[0];
     const categoryId = form?.category.value;
     const sellerName = user?.displayName;
+    const sellerEmail = user?.email;
     const location = form?.location.value;
     const resalePrice = form?.resalePrice.value;
     const originalPrice = form?.originalPrice.value;
@@ -46,6 +47,7 @@ const AddProduct = () => {
           productName,
           categoryId,
           sellerName,
+          sellerEmail,
           location,
           resalePrice,
           originalPrice,
@@ -69,6 +71,7 @@ const AddProduct = () => {
           .then((data) => {
             if (data.acknowledged) {
               toast.success("Product Added Successfully");
+              form.reset();
             } else {
               toast.error(data.message);
             }
@@ -218,7 +221,7 @@ const AddProduct = () => {
             ></textarea>
           </div>
           <div className="form-control mt-6">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary text-white">
               Add Product
             </button>
           </div>
