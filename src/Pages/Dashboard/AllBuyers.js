@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
 
-const AllUsers = () => {
+const AllBuyers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -52,7 +52,7 @@ const AllUsers = () => {
 
   return (
     <div className="p-10">
-      <h3 className="text-3xl mb-5 font-semibold text-primary">All Users</h3>
+      <h3 className="text-3xl mb-5 font-semibold text-primary">All Buyers</h3>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -67,29 +67,35 @@ const AllUsers = () => {
           <tbody>
             {users.map((user, i) => (
               <tr key={i}>
-                <th>{i + 1}</th>
-                <td>{user?.name}</td>
-                <td>{user?.email}</td>
-                <td>
-                  {user?.acting !== "admin" ? (
-                    <button
-                      onClick={() => handleMakeAdmin(user?._id)}
-                      className="btn btn-xs btn-primary text-white"
-                    >
-                      Make Admin
-                    </button>
-                  ) : (
-                    <span className="text-primary font-semibold">Admin</span>
-                  )}
-                </td>
-                <td>
-                  <button
-                    onClick={() => handleDelete(user)}
-                    className="btn btn-xs"
-                  >
-                    Delete
-                  </button>
-                </td>
+                {user?.acting === "buyer" && (
+                  <>
+                    <th>{i + 1}</th>
+                    <td>{user?.name}</td>
+                    <td>{user?.email}</td>
+                    <td>
+                      {user?.acting !== "admin" ? (
+                        <button
+                          onClick={() => handleMakeAdmin(user?._id)}
+                          className="btn btn-xs btn-primary text-white"
+                        >
+                          Make Admin
+                        </button>
+                      ) : (
+                        <span className="text-primary font-semibold">
+                          Admin
+                        </span>
+                      )}
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(user)}
+                        className="btn btn-xs"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </>
+                )}
               </tr>
             ))}
           </tbody>
@@ -99,4 +105,4 @@ const AllUsers = () => {
   );
 };
 
-export default AllUsers;
+export default AllBuyers;

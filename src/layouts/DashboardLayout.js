@@ -54,11 +54,20 @@ const DashboardLayout = () => {
             {isAdmin && (
               <>
                 <li>
-                  <Link to="/dashboard/allusers" className="hover:bg-primary">
-                    All users
+                  <Link to="/dashboard/allsellers" className="hover:bg-primary">
+                    All Sellers
                   </Link>
                 </li>
-
+                <li>
+                  <Link to="/dashboard/allbuyers" className="hover:bg-primary">
+                    All Buyers
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/alladmins" className="hover:bg-primary">
+                    All Admins
+                  </Link>
+                </li>
                 <li>
                   <Link
                     to="/dashboard/reporteditems"

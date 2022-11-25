@@ -4,7 +4,9 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Main from "../layouts/Main";
 import Blog from "../Pages/Blogs/Blog";
 import AddProduct from "../Pages/Dashboard/AddProduct";
-import AllUsers from "../Pages/Dashboard/AllUsers";
+import AllAdmins from "../Pages/Dashboard/AllAdmins";
+import AllBuyers from "../Pages/Dashboard/AllBuyers";
+import AllSellers from "../Pages/Dashboard/AllSellers";
 import MyBuyers from "../Pages/Dashboard/MyBuyers";
 import MyOrders from "../Pages/Dashboard/MyOrders";
 import ReportedItems from "../Pages/Dashboard/ReportedItems";
@@ -48,10 +50,26 @@ export const router = createBrowserRouter([
     children: [
       { path: "/dashboard", element: <MyOrders></MyOrders> },
       {
-        path: "/dashboard/allusers",
+        path: "/dashboard/allsellers",
         element: (
           <AdminRoute>
-            <AllUsers></AllUsers>
+            <AllSellers></AllSellers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allbuyers",
+        element: (
+          <AdminRoute>
+            <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/alladmins",
+        element: (
+          <AdminRoute>
+            <AllAdmins></AllAdmins>
           </AdminRoute>
         ),
       },

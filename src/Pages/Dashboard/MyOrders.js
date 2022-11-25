@@ -22,7 +22,6 @@ const MyOrders = () => {
       return data;
     },
   });
-  console.log(bookings);
 
   // Delete Operation for My Orders
   const handleDelete = (booking) => {
@@ -58,10 +57,10 @@ const MyOrders = () => {
               <thead>
                 <tr>
                   <th></th>
+                  <th>Product Image</th>
                   <th>Product Name</th>
                   <th>Buyer Name</th>
                   <th>location</th>
-                  <th>phone</th>
                   <th>Delete</th>
                   <th>Payment</th>
                 </tr>
@@ -70,10 +69,16 @@ const MyOrders = () => {
                 {bookings?.map((booking, i) => (
                   <tr key={i}>
                     <th>{i + 1}</th>
+                    <td>
+                      <img
+                        className="h-10 w-20 rounded-lg"
+                        src={booking?.img}
+                        alt=""
+                      />
+                    </td>
                     <td>{booking?.productName}</td>
                     <td>{booking?.buyerName}</td>
                     <td>{booking?.meetingLocation}</td>
-                    <td>{booking?.phone}</td>
                     <td>
                       <label
                         onClick={() => handleDelete(booking)}
