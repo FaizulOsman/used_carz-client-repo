@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import toast from "react-hot-toast";
 import Lottie from "lottie-react";
 import NotFound from "../../assets/not-found.json";
 import { AuthContext } from "../../contexts/AuthProvider";

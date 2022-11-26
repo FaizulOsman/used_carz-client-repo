@@ -79,7 +79,7 @@ const Login = () => {
           name: user?.displayName,
           email: user?.email,
           image: user?.photoURL,
-          acting: "Buyer",
+          acting: "buyer",
         };
 
         // set JWT token

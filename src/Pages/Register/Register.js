@@ -39,9 +39,28 @@ const Register = () => {
         // Create User
         createUser(email, password)
           .then((result) => {
+            const user = result.user;
+            const currentUser = { email: user?.email };
+
             // Update User (Name, Image)
             updateUserProfile(name, imageURL)
               .then(() => {
+                // set JWT token
+                fetch("http://localhost:5000/jwt", {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                    authorization: `bearer ${localStorage.getItem(
+                      "accessToken"
+                    )}`,
+                  },
+                  body: JSON.stringify(currentUser),
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    // set token in local storage
+                    localStorage.setItem("accessToken", data.token);
+                  });
                 saveUser(userDetails);
                 toast.success("Successfully Registered");
                 navigate(from, { replace: true });
@@ -78,12 +97,12 @@ const Register = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
-        const currentUser = { email: user.email };
+        const currentUser = { email: user?.email };
         const userDetails = {
           name: user?.displayName,
           email: user?.email,
           image: user?.photoURL,
-          acting: "Buyer",
+          acting: "buyer",
         };
 
         // set JWT token
