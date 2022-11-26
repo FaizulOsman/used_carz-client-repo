@@ -1,9 +1,19 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
+
+  const { data: databaseUser = [] } = useQuery({
+    queryKey: ["databaseUser"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/users/${user?.email}`);
+      const data = await res.json();
+      return data;
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +36,12 @@ const AddProduct = () => {
     const postedDate = `${day}-${month}-${year}`;
 
     const postedTime = new Date().toLocaleTimeString();
-    const isVerified = false;
+    let isVerified;
+    if (databaseUser?.verifyStatus === "verified") {
+      isVerified = true;
+    } else {
+      isVerified = false;
+    }
     const condition = form?.condition.value;
     const mobile = form?.mobile.value;
 

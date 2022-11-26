@@ -31,6 +31,28 @@ const AllSellers = () => {
     }
   };
 
+  const handleVerify = (user) => {
+    const { _id } = user;
+    const confirm = window.confirm(
+      `Are you sure to make "${user?.name}" verified?`
+    );
+    if (confirm) {
+      fetch(`http://localhost:5000/users/verify/${_id}`, {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.modifiedCount) {
+            toast.success("User verified successfully");
+            refetch();
+          }
+        });
+    }
+  };
+
   const handleDelete = (user) => {
     const isConfirm = window.confirm(`Do you want to delete "${user?.name}"?`);
     if (isConfirm) {
@@ -61,6 +83,7 @@ const AllSellers = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Admin</th>
+              <th>Verify</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -83,6 +106,20 @@ const AllSellers = () => {
                       ) : (
                         <span className="text-primary font-semibold">
                           Admin
+                        </span>
+                      )}
+                    </td>
+                    <td>
+                      {user?.verifyStatus !== "verified" ? (
+                        <button
+                          onClick={() => handleVerify(user)}
+                          className="btn btn-xs btn-primary text-white"
+                        >
+                          Verify
+                        </button>
+                      ) : (
+                        <span className="text-primary font-semibold">
+                          Verified
                         </span>
                       )}
                     </td>
