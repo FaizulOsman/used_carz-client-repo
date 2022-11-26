@@ -80,12 +80,17 @@ const MyOrders = () => {
                     <td>{booking?.buyerName}</td>
                     <td>{booking?.meetingLocation}</td>
                     <td>
-                      <label
-                        onClick={() => handleDelete(booking)}
-                        className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
-                      >
-                        Delete
-                      </label>
+                      {booking?.price && !booking?.paid && (
+                        <label
+                          onClick={() => handleDelete(booking)}
+                          className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
+                        >
+                          Delete
+                        </label>
+                      )}
+                      {booking?.price && booking?.paid && (
+                        <span className="text-primary">Can't Delete</span>
+                      )}
                     </td>
                     <td>
                       {booking?.price && !booking?.paid && (

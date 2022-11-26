@@ -47,6 +47,7 @@ const Register = () => {
                 navigate(from, { replace: true });
               })
               .catch((e) => toast.error(e.message));
+            setLoading(false);
           })
           .catch((e) => {
             toast.error(e.message);

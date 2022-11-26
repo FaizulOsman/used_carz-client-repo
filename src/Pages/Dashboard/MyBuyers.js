@@ -9,9 +9,9 @@ import { useQuery } from "@tanstack/react-query";
 const MyBuyers = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/mybuyers?email=${user?.email}`;
-  const { data: buyers = [], refetch } = useQuery({
-    queryKey: ["buyers", user?.email],
+  const url = `http://localhost:5000/myproductsfrombooking?email=${user?.email}`;
+  const { data: myproducts = [], refetch } = useQuery({
+    queryKey: ["myproducts", user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
         headers: {
@@ -23,9 +23,11 @@ const MyBuyers = () => {
     },
   });
 
+  const soldProduct = myproducts.filter((product) => product?.paid === true);
+
   return (
     <>
-      {buyers.length > 0 ? (
+      {soldProduct.length > 0 ? (
         <div className="my-10 w-11/12 max-w-[1400px] mx-auto">
           <div className="p-10">
             <h2 className="text-3xl mb-10 font-semibold text-primary text-center">
@@ -37,38 +39,20 @@ const MyBuyers = () => {
                   <tr>
                     <th></th>
                     <th>Product Name</th>
-                    <th>Seller Name</th>
-                    <th>Seller Email</th>
-                    <th>Phone</th>
+                    <th>Buyer Name</th>
+                    <th>Buyer Email</th>
                     <th>Status</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {buyers?.map((product, i) => (
+                  {soldProduct?.map((product, i) => (
                     <tr key={i}>
                       <th>{i + 1}</th>
                       <td>{product?.productName}</td>
-                      <td>{product?.sellerName}</td>
-                      <td>{product?.sellerEmail}</td>
-                      <td>{product?.mobile}</td>
-                      <td>
-                        {product?.status === "sold" ? (
-                          <label
-                            // onClick={() => handleAvailableStatus(product)}
-                            className="badge py-3 badge-outline bg-primary hover:bg-secondary text-white"
-                          >
-                            Available
-                          </label>
-                        ) : (
-                          <label
-                            // onClick={() => handleSoldStatus(product)}
-                            className="badge py-3 badge-outline bg-primary hover:bg-secondary text-white"
-                          >
-                            Sold
-                          </label>
-                        )}
-                      </td>
+                      <td>{product?.buyerName}</td>
+                      <td>{product?.buyerEmail}</td>
+                      <td>{product?.paid && <p>paid</p>}</td>
                       <td>
                         <label
                           // onClick={() => handleDelete(product)}

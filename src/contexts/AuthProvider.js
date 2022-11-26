@@ -50,6 +50,7 @@ const AuthProvider = ({ children }) => {
   // Log Out
   const logOut = () => {
     setLoading(true);
+    localStorage.removeItem("accessToken");
     return signOut(auth);
   };
   // Get Users Update Data on State Change
