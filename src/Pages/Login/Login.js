@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -6,13 +7,28 @@ import PrimaryButton from "../../components/PrimaryButton";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Login = () => {
-  const { logIn, loading, setLoading, googleSignIn, resetPassword } =
-    useContext(AuthContext);
+  const {
+    logIn,
+    loading,
+    setLoading,
+    googleSignIn,
+    resetPassword,
+    githubSignIn,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const [userEmail, setUserEmail] = useState();
 
   const from = location.state?.from?.pathname || "/";
+
+  const { data: databaseUsers = [] } = useQuery({
+    queryKey: ["databaseUsers"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/users`);
+      const data = await res.json();
+      return data;
+    },
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -87,16 +103,67 @@ const Login = () => {
           method: "POST",
           headers: {
             "content-type": "application/json",
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
           },
           body: JSON.stringify(currentUser),
         })
           .then((res) => res.json())
           .then((data) => {
-            saveUser(userDetails);
+            const filter = databaseUsers.filter(
+              (databaseUser) => databaseUser?.email === user?.email
+            );
+            if (!filter) {
+              saveUser(userDetails);
+            }
+
             // set token in local storage
             localStorage.setItem("accessToken", data.token);
             toast.success("Successfully signed in with google");
+            navigate(from, { replace: true });
+          });
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error(e.message);
+        setLoading(false);
+      });
+  };
+
+  // Github Sign In
+  const handleGithubSignIn = () => {
+    githubSignIn()
+      .then((result) => {
+        const user = result.user;
+        const currentUser = { email: user.email };
+        const userDetails = {
+          name: user?.displayName,
+          email: user?.email,
+          image: user?.photoURL,
+          acting: "buyer",
+        };
+
+        // set JWT token
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const filter = databaseUsers.filter(
+              (databaseUser) => databaseUser?.email === user?.email
+            );
+            if (!filter) {
+              saveUser(userDetails);
+            }
+
+            // set token in local storage
+            localStorage.setItem("accessToken", data.token);
+            toast.success("Successfully signed in with github");
             navigate(from, { replace: true });
           });
         setLoading(false);
@@ -210,7 +277,7 @@ const Login = () => {
           </button>
 
           <button
-            // onClick={handleGithubSignIn}
+            onClick={handleGithubSignIn}
             aria-label="Log in with GitHub"
             className="p-3 rounded-sm"
           >
