@@ -1,11 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
-import { PulseLoader } from "react-spinners";
 
 const AllUsers = () => {
-  const [loading, setLoading] = useState(true);
-
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -13,7 +10,6 @@ const AllUsers = () => {
         `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users`
       );
       const data = await res.json();
-      setLoading(false);
       return data;
     },
   });
@@ -61,14 +57,6 @@ const AllUsers = () => {
         });
     }
   };
-
-  if (loading) {
-    return (
-      <div className="w-20 mx-auto my-20">
-        <PulseLoader color="#36d7b7" />
-      </div>
-    );
-  }
 
   return (
     <div className="w-11/12 mx-auto p-10">

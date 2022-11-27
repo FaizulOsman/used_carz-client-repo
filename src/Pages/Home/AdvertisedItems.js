@@ -1,12 +1,16 @@
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ReportModal from "../../components/ReportModal";
+import { AuthContext } from "../../contexts/AuthProvider";
 import BookingModal from "../Products/BookingModal";
+import useBuyer from "../../hooks/useBuyer";
 
 const AdvertisedItems = () => {
   const [product, setProduct] = useState(null);
+  const { user } = useContext(AuthContext);
+  const [isBuyer] = useBuyer(user?.email);
 
   const { data: products = [], refetch } = useQuery({
     queryKey: ["products"],
@@ -105,15 +109,17 @@ const AdvertisedItems = () => {
                     </div>
                     <div>
                       <div>
-                        <label
-                          onClick={() => setProduct(product)}
-                          htmlFor="report-modal"
-                          className="badge badge-error hover:bg-red-600 text-white mb-1"
-                        >
-                          Report
-                        </label>
+                        {isBuyer && (
+                          <label
+                            onClick={() => setProduct(product)}
+                            htmlFor="report-modal"
+                            className="badge badge-error hover:bg-red-600 text-white mb-1"
+                          >
+                            Report
+                          </label>
+                        )}
                         <div>
-                          {product?.status !== "sold" && (
+                          {user && isBuyer && product?.status !== "sold" && (
                             <label
                               onClick={() => setProduct(product)}
                               htmlFor="booking-modal"

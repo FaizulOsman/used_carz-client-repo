@@ -1,10 +1,32 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
 import useTitle from "../../hooks/useTitle";
+import { HashLoader } from "react-spinners";
 
 const Blog = () => {
   useTitle("Blog");
-  const blogDatas = useLoaderData();
+
+  const [loading, setLoading] = useState(true);
+
+  const { data: blogDatas = [] } = useQuery({
+    queryKey: ["blogDatas"],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/blogs`
+      );
+      const data = await res.json();
+      setLoading(false);
+      return data;
+    },
+  });
+
+  if (loading) {
+    return (
+      <div className="w-20 mx-auto h-20 my-52">
+        <HashLoader color="#36d7b7" />
+      </div>
+    );
+  }
 
   return (
     <div>
