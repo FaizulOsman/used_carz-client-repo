@@ -63,7 +63,7 @@ const Footer = () => {
           </svg>
           <p>
             Used Carz Ltd. <br />
-            Providing reliable tech since 1992
+            Providing reliable service since 2020
           </p>
         </div>
         <div className="md:place-self-center md:justify-self-end">

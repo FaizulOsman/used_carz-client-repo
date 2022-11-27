@@ -16,7 +16,7 @@ const ReportedItems = () => {
 
   const handleDelete = (report) => {
     const isConfirm = window.confirm(
-      `Do you want to delete "${report?.name}"s report?`
+      `Do you want to delete "${report?.productName}"s report?`
     );
     if (isConfirm) {
       fetch(
@@ -31,7 +31,7 @@ const ReportedItems = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
-            toast.success(`${report?.name} deleted successfully`);
+            toast.success(`${report?.productName} deleted successfully`);
             refetch();
           }
         });
