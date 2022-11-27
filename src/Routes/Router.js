@@ -32,7 +32,14 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home></Home> },
       { path: "/login", element: <Login></Login> },
       { path: "/register", element: <Register></Register> },
-      { path: "/blog", element: <Blog></Blog> },
+      {
+        path: "/blog",
+        loader: () =>
+          fetch(
+            `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/blogs`
+          ),
+        element: <Blog></Blog>,
+      },
       {
         path: "/category/:id",
         element: (

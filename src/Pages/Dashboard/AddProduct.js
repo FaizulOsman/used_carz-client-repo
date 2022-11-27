@@ -26,9 +26,9 @@ const AddProduct = () => {
     const sellerName = user?.displayName;
     const sellerEmail = user?.email;
     const location = form?.location.value;
-    const resalePrice = form?.resalePrice.value;
-    const originalPrice = form?.originalPrice.value;
-    const yearsOfUse = form?.yearsOfUse.value;
+    const resalePrice = parseInt(form?.resalePrice.value);
+    const originalPrice = parseInt(form?.originalPrice.value);
+    const yearOfPurchase = parseInt(form?.yearOfPurchase.value);
     const description = form?.description.value;
 
     const date = new Date();
@@ -67,7 +67,7 @@ const AddProduct = () => {
           location,
           resalePrice,
           originalPrice,
-          yearsOfUse,
+          yearOfPurchase,
           postedDate,
           postedTime,
           isVerified,
@@ -148,12 +148,12 @@ const AddProduct = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Years of Use</span>
+                <span className="label-text">Year Of Purchase</span>
               </label>
               <input
                 type="number"
-                name="yearsOfUse"
-                placeholder="Years of Use"
+                name="yearOfPurchase"
+                placeholder="Year Of Purchase"
                 className="input input-bordered"
                 required
               />

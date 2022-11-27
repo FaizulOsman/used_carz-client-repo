@@ -4,9 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import ReportModal from "../../components/ReportModal";
+import useTitle from "../../hooks/useTitle";
 import BookingModal from "./BookingModal";
 
 const Products = () => {
+  useTitle("Products");
   const location = useLocation();
   const id = location?.pathname.split("/category/")[1];
   const [product, setProduct] = useState(null);
@@ -70,8 +72,8 @@ const Products = () => {
                     <span>{product?.condition}</span>
                   </p>
                   <p>
-                    <span className="font-semibold">Years of use: </span>
-                    <span>{product?.yearsOfUse}y</span>
+                    <span className="font-semibold">Year Of Purchase: </span>
+                    <span>{product?.yearOfPurchase}</span>
                   </p>
                 </div>
                 <div>

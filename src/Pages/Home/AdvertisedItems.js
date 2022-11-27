@@ -71,8 +71,10 @@ const AdvertisedItems = () => {
                         <span>{product?.condition}</span>
                       </p>
                       <p>
-                        <span className="font-semibold">Years of use: </span>
-                        <span>{product?.yearsOfUse}y</span>
+                        <span className="font-semibold">
+                          Year Of Purchase:{" "}
+                        </span>
+                        <span>{product?.yearOfPurchase}</span>
                       </p>
                     </div>
                     <div>
