@@ -6,7 +6,9 @@ const ReportedItems = () => {
   const { data: reports = [], refetch } = useQuery({
     queryKey: ["reports"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/reports`);
+      const res = await fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/reports`
+      );
       const data = await res.json();
       return data;
     },
@@ -17,12 +19,15 @@ const ReportedItems = () => {
       `Do you want to delete "${report?.name}"s report?`
     );
     if (isConfirm) {
-      fetch(`http://localhost:5000/reports/${report?._id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/reports/${report?._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
@@ -34,7 +39,7 @@ const ReportedItems = () => {
   };
 
   return (
-    <div className="p-10">
+    <div className="w-11/12 mx-auto p-10">
       <h3 className="text-3xl mb-5 font-semibold text-primary">
         Reported Items
       </h3>
@@ -61,7 +66,7 @@ const ReportedItems = () => {
                 <td>
                   <button
                     onClick={() => handleDelete(report)}
-                    className="btn btn-xs btn-error text-white"
+                    className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
                   >
                     Delete
                   </button>

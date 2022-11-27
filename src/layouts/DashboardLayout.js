@@ -4,12 +4,14 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { AuthContext } from "../contexts/AuthProvider";
 import useAdmin from "../hooks/useAdmin";
+import useBuyer from "../hooks/useBuyer";
 import useSeller from "../hooks/useSeller";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
   const [isAdmin] = useAdmin(user?.email);
   const [isSeller] = useSeller(user?.email);
+  const [isBuyer] = useBuyer(user?.email);
 
   return (
     <div>
@@ -27,11 +29,13 @@ const DashboardLayout = () => {
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-secondary text-white">
             {/* <!-- Sidebar content here --> */}
-            <li>
-              <Link to="/dashboard" className="hover:bg-primary">
-                My Orders
-              </Link>
-            </li>
+            {isBuyer && (
+              <li>
+                <Link to="/dashboard/myorders" className="hover:bg-primary">
+                  My Orders
+                </Link>
+              </li>
+            )}
             {isSeller && (
               <>
                 <li>
@@ -53,6 +57,11 @@ const DashboardLayout = () => {
             )}
             {isAdmin && (
               <>
+                <li>
+                  <Link to="/dashboard/allusers" className="hover:bg-primary">
+                    All Users
+                  </Link>
+                </li>
                 <li>
                   <Link to="/dashboard/allsellers" className="hover:bg-primary">
                     All Sellers

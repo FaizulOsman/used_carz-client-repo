@@ -7,16 +7,19 @@ import AddProduct from "../Pages/Dashboard/AddProduct";
 import AllAdmins from "../Pages/Dashboard/AllAdmins";
 import AllBuyers from "../Pages/Dashboard/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AllSellers";
+import AllUsers from "../Pages/Dashboard/AllUsers";
+import Dashboard from "../Pages/Dashboard/Dashboard";
 import MyBuyers from "../Pages/Dashboard/MyBuyers";
 import MyOrders from "../Pages/Dashboard/MyOrders";
+import MyProducts from "../Pages/Dashboard/MyProducts";
 import Payment from "../Pages/Dashboard/Payment";
 import ReportedItems from "../Pages/Dashboard/ReportedItems";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
-import MyProducts from "../Pages/MyProducts/MyProducts";
 import Products from "../Pages/Products/Products";
 import Register from "../Pages/Register/Register";
 import AdminRoute from "./AdminRoute";
+import BuyerRoute from "./BuyerRoute";
 import PrivateRoute from "./PrivateRoute";
 import SellerRoute from "./SellerRoute";
 
@@ -49,7 +52,26 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      { path: "/dashboard", element: <MyOrders></MyOrders> },
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "/dashboard/myorders",
+        element: (
+          <BuyerRoute>
+            <MyOrders></MyOrders>
+          </BuyerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allusers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
       {
         path: "/dashboard/allsellers",
         element: (
@@ -109,7 +131,9 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookings/${params.id}`),
+          fetch(
+            `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/bookings/${params.id}`
+          ),
         element: <Payment></Payment>,
       },
     ],

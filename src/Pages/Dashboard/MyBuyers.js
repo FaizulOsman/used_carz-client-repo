@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 const MyBuyers = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/myproductsfrombooking?email=${user?.email}`;
+  const url = `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/myproductsfrombooking?email=${user?.email}`;
   const { data: myproducts = [], refetch } = useQuery({
     queryKey: ["myproducts", user?.email],
     queryFn: async () => {
@@ -27,9 +27,9 @@ const MyBuyers = () => {
   return (
     <>
       {soldProduct.length > 0 ? (
-        <div className="my-10 w-11/12 max-w-[1400px] mx-auto">
-          <div className="p-10">
-            <h2 className="text-3xl mb-10 font-semibold text-primary text-center">
+        <div className="w-11/12 mx-auto p-10">
+          <div className="">
+            <h2 className="text-3xl mb-5 font-semibold text-primary">
               My buyers
             </h2>
             <div className="overflow-x-auto">

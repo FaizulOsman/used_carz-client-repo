@@ -6,7 +6,9 @@ const AllAdmins = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users`);
+      const res = await fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users`
+      );
       const data = await res.json();
       return data;
     },
@@ -15,12 +17,15 @@ const AllAdmins = () => {
   const handleMakeAdmin = (id) => {
     const confirm = window.confirm("Are you sure to make a user admin?");
     if (confirm) {
-      fetch(`http://localhost:5000/users/admin/${id}`, {
-        method: "PUT",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users/admin/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount) {
@@ -34,12 +39,15 @@ const AllAdmins = () => {
   const handleDelete = (user) => {
     const isConfirm = window.confirm(`Do you want to delete "${user?.name}"?`);
     if (isConfirm) {
-      fetch(`http://localhost:5000/users/${user?._id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users/${user?._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
@@ -51,7 +59,7 @@ const AllAdmins = () => {
   };
 
   return (
-    <div className="p-10">
+    <div className="w-11/12 mx-auto p-10">
       <h3 className="text-3xl mb-5 font-semibold text-primary">All Admins</h3>
       <div className="overflow-x-auto">
         <table className="table w-full">
@@ -66,10 +74,16 @@ const AllAdmins = () => {
           </thead>
           <tbody>
             {users.map((user, i) => (
-              <tr key={i}>
+              <tr key={user?._id}>
                 {user?.acting === "admin" && (
                   <>
-                    <th>{i + 1}</th>
+                    <th>
+                      <div className="avatar">
+                        <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                          <img src={user?.image} alt="" />
+                        </div>
+                      </div>
+                    </th>
                     <td>{user?.name}</td>
                     <td>{user?.email}</td>
                     <td>
@@ -96,8 +110,7 @@ const AllAdmins = () => {
                         </button>
                       ) : (
                         <button
-                          onClick={() => handleDelete(user)}
-                          className="badge py-3 badge-outline bg-red-600 text-white"
+                          className="badge py-3 badge-outline bg-red-400 text-white"
                           disabled
                         >
                           Delete

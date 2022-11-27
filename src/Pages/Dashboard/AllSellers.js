@@ -6,7 +6,9 @@ const AllSellers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users`);
+      const res = await fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users`
+      );
       const data = await res.json();
       return data;
     },
@@ -15,12 +17,15 @@ const AllSellers = () => {
   const handleMakeAdmin = (id) => {
     const confirm = window.confirm("Are you sure to make a user admin?");
     if (confirm) {
-      fetch(`http://localhost:5000/users/admin/${id}`, {
-        method: "PUT",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users/admin/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount) {
@@ -37,12 +42,15 @@ const AllSellers = () => {
       `Are you sure to make "${user?.name}" verified?`
     );
     if (confirm) {
-      fetch(`http://localhost:5000/users/verify/${_id}`, {
-        method: "PUT",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users/verify/${_id}`,
+        {
+          method: "PUT",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount) {
@@ -56,12 +64,15 @@ const AllSellers = () => {
   const handleDelete = (user) => {
     const isConfirm = window.confirm(`Do you want to delete "${user?.name}"?`);
     if (isConfirm) {
-      fetch(`http://localhost:5000/users/${user?._id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users/${user?._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
@@ -73,7 +84,7 @@ const AllSellers = () => {
   };
 
   return (
-    <div className="p-10">
+    <div className="w-11/12 mx-auto p-10">
       <h3 className="text-3xl mb-5 font-semibold text-primary">All Sellers</h3>
       <div className="overflow-x-auto">
         <table className="table w-full">
@@ -92,7 +103,13 @@ const AllSellers = () => {
               <tr key={i}>
                 {user?.acting === "seller" && (
                   <>
-                    <th>{i + 1}</th>
+                    <th>
+                      <div className="avatar">
+                        <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                          <img src={user?.image} alt="" />
+                        </div>
+                      </div>
+                    </th>
                     <td>{user?.name}</td>
                     <td>{user?.email}</td>
                     <td>
@@ -126,7 +143,7 @@ const AllSellers = () => {
                     <td>
                       <button
                         onClick={() => handleDelete(user)}
-                        className="btn btn-xs"
+                        className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
                       >
                         Delete
                       </button>

@@ -25,13 +25,16 @@ const BookingModal = ({ setProduct, product, refetch }) => {
       sellerEmail,
     };
     setProduct(null);
-    fetch("http://localhost:5000/bookings", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(booking),
-    })
+    fetch(
+      "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/bookings",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(booking),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

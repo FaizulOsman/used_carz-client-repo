@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/myproducts?email=${user?.email}`;
+  const url = `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/myproducts?email=${user?.email}`;
   const { data: products = [], refetch } = useQuery({
     queryKey: ["products", user?.email],
     queryFn: async () => {
@@ -29,12 +29,15 @@ const MyProducts = () => {
       `Do you want to delete "${product?.productName}"?`
     );
     if (isConfirm) {
-      fetch(`http://localhost:5000/products/${product?._id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/${product?._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
@@ -47,12 +50,15 @@ const MyProducts = () => {
 
   // Update Operation for My Orders
   const handleSoldStatus = (product) => {
-    fetch(`http://localhost:5000/products/sold/${product?._id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/sold/${product?._id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -65,12 +71,15 @@ const MyProducts = () => {
 
   // Update Operation for My Orders
   const handleAvailableStatus = (product) => {
-    fetch(`http://localhost:5000/products/available/${product?._id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/available/${product?._id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -84,9 +93,9 @@ const MyProducts = () => {
   return (
     <>
       {products.length > 0 ? (
-        <div className="my-10 w-11/12 max-w-[1400px] mx-auto">
-          <div className="p-10">
-            <h2 className="text-3xl mb-10 font-semibold text-primary text-center">
+        <div className="w-11/12 mx-auto p-10">
+          <div className="">
+            <h2 className="text-3xl mb-5 font-semibold text-primary">
               My Products
             </h2>
             <div className="overflow-x-auto">

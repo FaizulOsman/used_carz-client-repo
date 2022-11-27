@@ -21,13 +21,16 @@ const ReportModal = ({ product, setProduct }) => {
       description,
     };
 
-    fetch("http://localhost:5000/reports", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(report),
-    })
+    fetch(
+      "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/reports",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(report),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

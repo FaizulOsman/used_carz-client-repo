@@ -7,9 +7,13 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/categories").then((data) => {
-      setCategories(data.data);
-    });
+    axios
+      .get(
+        "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/categories"
+      )
+      .then((data) => {
+        setCategories(data.data);
+      });
   }, []);
 
   return (

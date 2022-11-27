@@ -9,7 +9,9 @@ const AddProduct = () => {
   const { data: databaseUser = [] } = useQuery({
     queryKey: ["databaseUser"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users/${user?.email}`);
+      const res = await fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users/${user?.email}`
+      );
       const data = await res.json();
       return data;
     },
@@ -74,13 +76,16 @@ const AddProduct = () => {
           description,
         };
 
-        fetch("http://localhost:5000/products", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(product),
-        })
+        fetch(
+          "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(product),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.acknowledged) {
