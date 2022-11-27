@@ -38,10 +38,6 @@ export const router = createBrowserRouter([
       },
       {
         path: "/category/:id",
-        loader: () =>
-          fetch(
-            `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/allbookings`
-          ),
         element: (
           <PrivateRoute>
             <Products></Products>
