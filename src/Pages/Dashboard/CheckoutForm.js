@@ -8,7 +8,7 @@ const CheckoutForm = ({ booking }) => {
   const [cardError, setCardError] = useState("");
   const [processing, setProcessing] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
-  const { price, email, patient, _id } = booking;
+  const { price, email, patient, _id, productId } = booking;
   const [success, setSuccess] = useState("");
   const [transactionId, setTransactionId] = useState("");
 
@@ -83,6 +83,7 @@ const CheckoutForm = ({ booking }) => {
         transactionId: paymentIntent.id,
         email,
         bookingId: _id,
+        productId: productId,
       };
       fetch(
         `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/payments`,
@@ -113,7 +114,7 @@ const CheckoutForm = ({ booking }) => {
     <>
       <form onSubmit={handleSubmit}>
         <CardElement
-          className="border p-2 rounded-md"
+          className="border p-2 rounded-md w-3/4 sm:w-full"
           options={{
             style: {
               base: {

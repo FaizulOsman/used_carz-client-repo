@@ -26,8 +26,9 @@ const Products = () => {
         `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/category/${id}`
       );
       const data = await res.json();
+      const unsoldProducts = data.filter((product) => product?.paid !== true);
       setLoading(false);
-      return data;
+      return unsoldProducts;
     },
   });
 

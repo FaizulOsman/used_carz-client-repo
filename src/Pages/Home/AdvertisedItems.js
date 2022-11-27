@@ -19,11 +19,11 @@ const AdvertisedItems = () => {
         `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products`
       );
       const data = await res.json();
-      return data;
+      const unsoldProducts = data.filter((product) => product?.paid !== true);
+      const threeProducts = unsoldProducts.slice(0, 3);
+      return threeProducts;
     },
   });
-
-  products.slice(0, 3);
 
   return (
     <>

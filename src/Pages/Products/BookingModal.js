@@ -1,16 +1,33 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const BookingModal = ({ setProduct, product, refetch }) => {
-  const { productName, resalePrice, sellerEmail, img } = product;
+  const { productName, resalePrice, sellerEmail, img, _id } = product;
   const { user } = useContext(AuthContext);
+
+  const { data: bookings = [] } = useQuery({
+    queryKey: ["bookings"],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/allbookings`
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
+  const booked = bookings.filter(
+    (booking) =>
+      booking?.productId === _id && booking?.buyerEmail === user?.email
+  );
 
   const handleBooking = (e) => {
     e.preventDefault();
     const form = e.target;
     const buyerName = form?.name.value;
     const buyerEmail = form?.email.value;
+    const productId = _id;
     const price = resalePrice;
     const phone = form?.phone.value;
     const meetingLocation = form?.location.value;
@@ -18,13 +35,16 @@ const BookingModal = ({ setProduct, product, refetch }) => {
       buyerName,
       buyerEmail,
       productName,
+      productId,
       img,
       price,
       phone,
       meetingLocation,
       sellerEmail,
     };
+
     setProduct(null);
+
     fetch(
       "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/bookings",
       {
@@ -103,9 +123,15 @@ const BookingModal = ({ setProduct, product, refetch }) => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button type="submit" className="btn btn-primary btn-outline">
-                  Submit
-                </button>
+                {!booked.length > 0 ? (
+                  <button type="submit" className="btn btn-primary btn-outline">
+                    Submit
+                  </button>
+                ) : (
+                  <p className="btn btn-error" disabled>
+                    Already Booked
+                  </p>
+                )}
               </div>
             </form>
           </div>
