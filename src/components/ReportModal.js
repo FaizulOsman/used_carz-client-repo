@@ -21,16 +21,14 @@ const ReportModal = ({ product, setProduct }) => {
       description,
     };
 
-    fetch(
-      "http://localhost:5000/reports",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(report),
-      }
-    )
+    fetch("http://localhost:5000/reports", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(report),
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
