@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const { data: databaseUser = [] } = useQuery({
     queryKey: ["databaseUser"],
@@ -92,6 +94,7 @@ const AddProduct = () => {
             if (data.acknowledged) {
               toast.success("Product Added Successfully");
               form.reset();
+              navigate("/dashboard/myproducts");
             } else {
               toast.error(data.message);
             }
