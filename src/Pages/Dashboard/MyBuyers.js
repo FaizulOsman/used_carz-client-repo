@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 const MyBuyers = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/myproductsfrombooking?email=${user?.email}`;
+  const url = `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/myproductsfrombooking?email=${user?.email}`;
   const { data: myproducts = [], refetch } = useQuery({
     queryKey: ["myproducts", user?.email],
     queryFn: async () => {
@@ -40,8 +40,8 @@ const MyBuyers = () => {
                     <th>Product Name</th>
                     <th>Buyer Name</th>
                     <th>Buyer Email</th>
+                    <th>Phone</th>
                     <th>Status</th>
-                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -51,14 +51,11 @@ const MyBuyers = () => {
                       <td>{product?.productName}</td>
                       <td>{product?.buyerName}</td>
                       <td>{product?.buyerEmail}</td>
-                      <td>{product?.paid && <p>paid</p>}</td>
+                      <td>{product?.phone}</td>
                       <td>
-                        <label
-                          // onClick={() => handleDelete(product)}
-                          className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
-                        >
-                          Delete
-                        </label>
+                        {product?.paid && (
+                          <p className="text-primary font-semibold">paid</p>
+                        )}
                       </td>
                     </tr>
                   ))}

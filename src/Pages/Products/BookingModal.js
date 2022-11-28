@@ -10,7 +10,9 @@ const BookingModal = ({ setProduct, product, refetch }) => {
   const { data: bookings = [] } = useQuery({
     queryKey: ["bookings"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/allbookings`);
+      const res = await fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/allbookings`
+      );
       const data = await res.json();
       return data;
     },
@@ -43,14 +45,17 @@ const BookingModal = ({ setProduct, product, refetch }) => {
 
     setProduct(null);
 
-    fetch("http://localhost:5000/bookings", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify(booking),
-    })
+    fetch(
+      "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/bookings",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(booking),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

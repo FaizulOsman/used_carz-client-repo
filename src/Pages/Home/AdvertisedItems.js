@@ -16,17 +16,19 @@ const AdvertisedItems = () => {
   const { data: products = [], refetch } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/products`);
+      const res = await fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products`
+      );
       const data = await res.json();
       const unsoldProducts = data.filter((product) => product?.paid !== true);
 
       return unsoldProducts;
     },
   });
-
+  console.log(products);
   return (
     <>
-      {products && (
+      {products.length > 0 && (
         <div className="w-11/12 max-w-[1400px] mx-auto my-20">
           <h2 className="mb-10 text-4xl font-bold text-center text-secondary">
             Advertised Items

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/myproducts?email=${user?.email}`;
+  const url = `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/myproducts?email=${user?.email}`;
   const { data: products = [], refetch } = useQuery({
     queryKey: ["products", user?.email],
     queryFn: async () => {
@@ -29,12 +29,15 @@ const MyProducts = () => {
       `Do you want to delete "${product?.productName}"?`
     );
     if (isConfirm) {
-      fetch(`http://localhost:5000/products/${product?._id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/${product?._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
@@ -49,12 +52,15 @@ const MyProducts = () => {
 
   // Update Operation for My Products
   const handleSoldStatus = (product) => {
-    fetch(`http://localhost:5000/products/sold/${product?._id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/sold/${product?._id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -67,12 +73,15 @@ const MyProducts = () => {
 
   // Update Operation for My Products
   const handleAvailableStatus = (product) => {
-    fetch(`http://localhost:5000/products/available/${product?._id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/available/${product?._id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -85,12 +94,15 @@ const MyProducts = () => {
 
   // Update Advertise (make)
   const handleMakeAdvertise = (product) => {
-    fetch(`http://localhost:5000/products/makeadvertise/${product?._id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/makeadvertise/${product?._id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -103,12 +115,15 @@ const MyProducts = () => {
 
   // Update Advertise (remove)
   const handleRemoveAdvertise = (product) => {
-    fetch(`http://localhost:5000/products/removeadvertise/${product?._id}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/removeadvertise/${product?._id}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

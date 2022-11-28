@@ -6,7 +6,9 @@ const SingleProduct = ({ product, isBuyer, setProduct }) => {
   const { sellerEmail } = product;
   const [isVerified, setIsVerified] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:5000/checksellerverify?email=${sellerEmail}`)
+    fetch(
+      `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/checksellerverify?email=${sellerEmail}`
+    )
       .then((res) => res.json())
       .then((data) => setIsVerified(data.isVerified));
   }, [sellerEmail]);

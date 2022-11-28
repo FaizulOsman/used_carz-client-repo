@@ -9,7 +9,7 @@ import { AuthContext } from "../../contexts/AuthProvider";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/bookings?email=${user?.email}`;
+  const url = `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/bookings?email=${user?.email}`;
   const { data: bookings = [], refetch } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
@@ -29,12 +29,15 @@ const MyOrders = () => {
       `Do you want to delete "${booking?.productName}"?`
     );
     if (isConfirm) {
-      fetch(`http://localhost:5000/bookings/${booking?._id}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/bookings/${booking?._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
