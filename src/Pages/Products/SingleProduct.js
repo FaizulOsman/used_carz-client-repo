@@ -12,6 +12,10 @@ const SingleProduct = ({ product, isBuyer, setProduct }) => {
       .then((res) => res.json())
       .then((data) => setIsVerified(data.isVerified));
   }, [sellerEmail]);
+  const thisYear = new Date().getFullYear();
+  const purchaseYear = product?.yearOfPurchase;
+  const yearsOfUse = thisYear - purchaseYear;
+
   return (
     <div key={product?._id} className="card bg-base-100 shadow-xl">
       <figure>
@@ -51,6 +55,10 @@ const SingleProduct = ({ product, isBuyer, setProduct }) => {
             </p>
           </div>
           <div>
+            <p>
+              <span className="font-semibold">Years Of Use: </span>
+              <span>{yearsOfUse}y</span>
+            </p>
             <p>
               <span className="font-semibold">Original Price: </span>
               <span>${product?.originalPrice}</span>

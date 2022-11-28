@@ -25,7 +25,7 @@ const AdvertisedItems = () => {
       return unsoldProducts;
     },
   });
-  console.log(products);
+
   return (
     <>
       {products.length > 0 && (
