@@ -1,5 +1,3 @@
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import ReportModal from "../../components/ReportModal";
