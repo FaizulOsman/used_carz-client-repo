@@ -163,37 +163,51 @@ const MyProducts = () => {
                       <td>{product?.sellerName}</td>
                       <td>{product?.sellerEmail}</td>
                       <td>
-                        {product?.isAdvertised !== true ? (
-                          <label
-                            onClick={() => handleMakeAdvertise(product)}
-                            className="badge py-3 badge-outline bg-primary hover:bg-secondary text-white"
-                          >
-                            Make Advertise
-                          </label>
+                        {product?.paid !== true ? (
+                          <>
+                            {product?.isAdvertised !== true ? (
+                              <label
+                                onClick={() => handleMakeAdvertise(product)}
+                                className="badge py-3 badge-outline bg-primary hover:bg-secondary text-white"
+                              >
+                                Make Advertise
+                              </label>
+                            ) : (
+                              <label
+                                onClick={() => handleRemoveAdvertise(product)}
+                                className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
+                              >
+                                Remove Advertise
+                              </label>
+                            )}
+                          </>
                         ) : (
-                          <label
-                            onClick={() => handleRemoveAdvertise(product)}
-                            className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
-                          >
-                            Remove Advertise
-                          </label>
+                          <p className="text-primary font-semibold">
+                            Already Sold
+                          </p>
                         )}
                       </td>
                       <td>
-                        {product?.status === "sold" ? (
-                          <label
-                            onClick={() => handleAvailableStatus(product)}
-                            className="badge py-3 badge-outline bg-primary hover:bg-secondary text-white"
-                          >
-                            Available
-                          </label>
+                        {product?.paid !== true ? (
+                          <>
+                            {product?.status === "sold" ? (
+                              <label
+                                onClick={() => handleAvailableStatus(product)}
+                                className="badge py-3 badge-outline bg-primary hover:bg-secondary text-white"
+                              >
+                                Available
+                              </label>
+                            ) : (
+                              <label
+                                onClick={() => handleSoldStatus(product)}
+                                className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
+                              >
+                                Sold
+                              </label>
+                            )}
+                          </>
                         ) : (
-                          <label
-                            onClick={() => handleSoldStatus(product)}
-                            className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
-                          >
-                            Sold
-                          </label>
+                          <p className="text-primary font-semibold">Sold</p>
                         )}
                       </td>
                       <td>
