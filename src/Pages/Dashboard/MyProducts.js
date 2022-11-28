@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const MyProducts = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/myproducts?email=${user?.email}`;
+  const url = `http://localhost:5000/myproducts?email=${user?.email}`;
   const { data: products = [], refetch } = useQuery({
     queryKey: ["products", user?.email],
     queryFn: async () => {
@@ -23,21 +23,18 @@ const MyProducts = () => {
     },
   });
 
-  // Delete Operation for My Orders
+  // Delete Operation for My Products
   const handleDelete = (product) => {
     const isConfirm = window.confirm(
       `Do you want to delete "${product?.productName}"?`
     );
     if (isConfirm) {
-      fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/${product?._id}`,
-        {
-          method: "DELETE",
-          headers: {
-            authorization: `bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
+      fetch(`http://localhost:5000/products/${product?._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
@@ -50,17 +47,14 @@ const MyProducts = () => {
     }
   };
 
-  // Update Operation for My Orders
+  // Update Operation for My Products
   const handleSoldStatus = (product) => {
-    fetch(
-      `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/sold/${product?._id}`,
-      {
-        method: "PUT",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
+    fetch(`http://localhost:5000/products/sold/${product?._id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -71,22 +65,55 @@ const MyProducts = () => {
       });
   };
 
-  // Update Operation for My Orders
+  // Update Operation for My Products
   const handleAvailableStatus = (product) => {
-    fetch(
-      `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products/available/${product?._id}`,
-      {
-        method: "PUT",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
+    fetch(`http://localhost:5000/products/available/${product?._id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.modifiedCount) {
           toast.success("Status Updated successfully");
+          refetch();
+        }
+      });
+  };
+
+  // Update Advertise (make)
+  const handleMakeAdvertise = (product) => {
+    fetch(`http://localhost:5000/products/makeadvertise/${product?._id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          toast.success("Advertise added successfully");
+          refetch();
+        }
+      });
+  };
+
+  // Update Advertise (remove)
+  const handleRemoveAdvertise = (product) => {
+    fetch(`http://localhost:5000/products/removeadvertise/${product?._id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          toast.success("Advertise removed successfully");
           refetch();
         }
       });
@@ -108,7 +135,7 @@ const MyProducts = () => {
                     <th>Product Name</th>
                     <th>Seller Name</th>
                     <th>Seller Email</th>
-                    <th>Phone</th>
+                    <th>Advertise</th>
                     <th>Status</th>
                     <th>Delete</th>
                   </tr>
@@ -120,7 +147,23 @@ const MyProducts = () => {
                       <td>{product?.productName}</td>
                       <td>{product?.sellerName}</td>
                       <td>{product?.sellerEmail}</td>
-                      <td>{product?.mobile}</td>
+                      <td>
+                        {product?.isAdvertised !== true ? (
+                          <label
+                            onClick={() => handleMakeAdvertise(product)}
+                            className="badge py-3 badge-outline bg-primary hover:bg-secondary text-white"
+                          >
+                            Make Advertise
+                          </label>
+                        ) : (
+                          <label
+                            onClick={() => handleRemoveAdvertise(product)}
+                            className="badge py-3 badge-outline bg-red-600 hover:bg-red-700 text-white"
+                          >
+                            Remove Advertise
+                          </label>
+                        )}
+                      </td>
                       <td>
                         {product?.status === "sold" ? (
                           <label

@@ -1,5 +1,3 @@
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -9,6 +7,7 @@ import BookingModal from "./BookingModal";
 import { HashLoader } from "react-spinners";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useBuyer from "../../hooks/useBuyer";
+import SingleProduct from "./SingleProduct";
 
 const Products = () => {
   useTitle("Products");
@@ -22,9 +21,7 @@ const Products = () => {
   const { data: products = [], refetch } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/category/${id}`
-      );
+      const res = await fetch(`http://localhost:5000/category/${id}`);
       const data = await res.json();
       const unsoldProducts = data.filter((product) => product?.paid !== true);
       setLoading(false);
@@ -47,104 +44,12 @@ const Products = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
         {products?.map((product) => (
-          <div key={product?._id} className="card bg-base-100 shadow-xl">
-            <figure>
-              <img
-                className="w-full h-[280px]"
-                src={product?.img}
-                alt="Shoes"
-              />
-            </figure>
-            <div className="card-body">
-              <div className="flex justify-between items-center mb-3">
-                <div>
-                  {product?.status === "sold" ? (
-                    <div className="badge badge-error text-white">Sold</div>
-                  ) : (
-                    <div className="badge badge-accent text-white">
-                      Available
-                    </div>
-                  )}
-                  <h2 className="card-title">{product?.productName}</h2>
-                </div>
-                <div className="text-sm">
-                  <p>Date: {product?.postedDate}</p>
-                  <p>Time: {product?.postedTime}</p>
-                </div>
-              </div>
-              <div className="mb-2">
-                <p className="text-gray-500 text-justify">
-                  {product?.description}
-                </p>
-              </div>
-              <div className="card-actions justify-between mt-2">
-                <div>
-                  <p>
-                    <span className="font-semibold">Location: </span>
-                    <span>{product?.location}</span>
-                  </p>
-                  <p>
-                    <span className="font-semibold">Condition: </span>
-                    <span>{product?.condition}</span>
-                  </p>
-                  <p>
-                    <span className="font-semibold">Year Of Purchase: </span>
-                    <span>{product?.yearOfPurchase}</span>
-                  </p>
-                </div>
-                <div>
-                  <p>
-                    <span className="font-semibold">Original Price: </span>
-                    <span>${product?.originalPrice}</span>
-                  </p>
-                  <p>
-                    <span className="font-semibold">Resale Price: </span>
-                    <span>${product?.resalePrice}</span>
-                  </p>
-                </div>
-              </div>
-              <div className="card-actions justify-between mt-3">
-                <div>
-                  <h4 className="text-md font-semibold">
-                    {product.sellerName}
-                    {product?.isVerified && (
-                      <FontAwesomeIcon
-                        className="text-primary w-3 ml-1"
-                        icon={faCircleCheck}
-                      ></FontAwesomeIcon>
-                    )}
-                  </h4>
-                  <p>
-                    <small>{product?.mobile}</small>
-                  </p>
-                </div>
-                <div>
-                  <div>
-                    {isBuyer && (
-                      <label
-                        onClick={() => setProduct(product)}
-                        htmlFor="report-modal"
-                        className="badge badge-error hover:bg-red-600 text-white mb-1"
-                      >
-                        Report
-                      </label>
-                    )}
-                    <div>
-                      {isBuyer && product?.status !== "sold" && (
-                        <label
-                          onClick={() => setProduct(product)}
-                          htmlFor="booking-modal"
-                          className="badge py-3 badge-outline btn-primary text-white"
-                        >
-                          Book Now
-                        </label>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <SingleProduct
+            key={product?._id}
+            product={product}
+            isBuyer={isBuyer}
+            setProduct={setProduct}
+          ></SingleProduct>
         ))}
       </div>
       {product && (

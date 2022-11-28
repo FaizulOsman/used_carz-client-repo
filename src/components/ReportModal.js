@@ -22,7 +22,7 @@ const ReportModal = ({ product, setProduct }) => {
     };
 
     fetch(
-      "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/reports",
+      "http://localhost:5000/reports",
       {
         method: "POST",
         headers: {

@@ -24,9 +24,7 @@ const Login = () => {
   const { data: databaseUsers = [] } = useQuery({
     queryKey: ["databaseUsers"],
     queryFn: async () => {
-      const res = await fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users`
-      );
+      const res = await fetch(`http://localhost:5000/users`);
       const data = await res.json();
       return data;
     },
@@ -45,17 +43,14 @@ const Login = () => {
         const currentUser = { email: user.email };
 
         // set JWT token
-        fetch(
-          "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/jwt",
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-            },
-            body: JSON.stringify(currentUser),
-          }
-        )
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(currentUser),
+        })
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -77,16 +72,13 @@ const Login = () => {
   // Save user in database
   const saveUser = ({ name, email, image, acting }) => {
     const user = { name, email, image, acting };
-    fetch(
-      "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(user),
-      }
-    )
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -107,17 +99,14 @@ const Login = () => {
         };
 
         // set JWT token
-        fetch(
-          "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/jwt",
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-            body: JSON.stringify(currentUser),
-          }
-        )
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(currentUser),
+        })
           .then((res) => res.json())
           .then((data) => {
             const filter = databaseUsers.filter(
@@ -155,17 +144,14 @@ const Login = () => {
         };
 
         // set JWT token
-        fetch(
-          "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/jwt",
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              authorization: `bearer ${localStorage.getItem("accessToken")}`,
-            },
-            body: JSON.stringify(currentUser),
-          }
-        )
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify(currentUser),
+        })
           .then((res) => res.json())
           .then((data) => {
             const filter = databaseUsers.filter(

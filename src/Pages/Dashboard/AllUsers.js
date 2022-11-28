@@ -6,9 +6,7 @@ const AllUsers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users`
-      );
+      const res = await fetch(`http://localhost:5000/users`);
       const data = await res.json();
       return data;
     },
@@ -17,15 +15,12 @@ const AllUsers = () => {
   const handleMakeAdmin = (id) => {
     const confirm = window.confirm("Are you sure to make a user admin?");
     if (confirm) {
-      fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users/admin/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            authorization: `bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
+      fetch(`http://localhost:5000/users/admin/${id}`, {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount) {
@@ -39,15 +34,12 @@ const AllUsers = () => {
   const handleDelete = (user) => {
     const isConfirm = window.confirm(`Do you want to delete "${user?.name}"?`);
     if (isConfirm) {
-      fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users/${user?._id}`,
-        {
-          method: "DELETE",
-          headers: {
-            authorization: `bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
+      fetch(`http://localhost:5000/users/${user?._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {

@@ -9,9 +9,7 @@ const AddProduct = () => {
   const { data: databaseUser = [] } = useQuery({
     queryKey: ["databaseUser"],
     queryFn: async () => {
-      const res = await fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/users/${user?.email}`
-      );
+      const res = await fetch(`http://localhost:5000/users/${user?.email}`);
       const data = await res.json();
       return data;
     },
@@ -39,7 +37,7 @@ const AddProduct = () => {
 
     const postedTime = new Date().toLocaleTimeString();
     let isVerified;
-    if (databaseUser?.verifyStatus === "verified") {
+    if (databaseUser?.isVerified === true) {
       isVerified = true;
     } else {
       isVerified = false;
@@ -50,7 +48,7 @@ const AddProduct = () => {
     // SetUp for image upload
     const formData = new FormData();
     formData.append("image", image);
-    const url = `https://api.imgbb.com/1/upload?key=75b7caa2bd73ebacc1c662eef1509f83`;
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgbb_key}`;
     fetch(url, {
       method: "POST",
       body: formData,
@@ -76,16 +74,13 @@ const AddProduct = () => {
           description,
         };
 
-        fetch(
-          "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products",
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(product),
-          }
-        )
+        fetch("http://localhost:5000/products", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(product),
+        })
           .then((res) => res.json())
           .then((data) => {
             if (data.acknowledged) {
@@ -121,7 +116,7 @@ const AddProduct = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Location</span>
+                <span className="label-text">Condition type</span>
               </label>
               <select
                 name="condition"

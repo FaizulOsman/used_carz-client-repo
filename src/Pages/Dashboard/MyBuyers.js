@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 const MyBuyers = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/myproductsfrombooking?email=${user?.email}`;
+  const url = `http://localhost:5000/myproductsfrombooking?email=${user?.email}`;
   const { data: myproducts = [], refetch } = useQuery({
     queryKey: ["myproducts", user?.email],
     queryFn: async () => {

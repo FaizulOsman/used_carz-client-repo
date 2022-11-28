@@ -11,9 +11,7 @@ const Blog = () => {
   const { data: blogDatas = [] } = useQuery({
     queryKey: ["blogDatas"],
     queryFn: async () => {
-      const res = await fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/blogs`
-      );
+      const res = await fetch(`http://localhost:5000/blogs`);
       const data = await res.json();
       setLoading(false);
       return data;

@@ -15,9 +15,7 @@ const AdvertisedItems = () => {
   const { data: products = [], refetch } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/products`
-      );
+      const res = await fetch(`http://localhost:5000/products`);
       const data = await res.json();
       const unsoldProducts = data.filter((product) => product?.paid !== true);
       const threeProducts = unsoldProducts.slice(0, 3);

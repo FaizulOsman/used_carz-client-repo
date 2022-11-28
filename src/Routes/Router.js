@@ -134,9 +134,7 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         loader: ({ params }) =>
-          fetch(
-            `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/bookings/${params.id}`
-          ),
+          fetch(`http://localhost:5000/bookings/${params.id}`),
         element: <Payment></Payment>,
       },
     ],

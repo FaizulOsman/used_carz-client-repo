@@ -6,9 +6,7 @@ const ReportedItems = () => {
   const { data: reports = [], refetch } = useQuery({
     queryKey: ["reports"],
     queryFn: async () => {
-      const res = await fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/reports`
-      );
+      const res = await fetch(`http://localhost:5000/reports`);
       const data = await res.json();
       return data;
     },
@@ -19,15 +17,12 @@ const ReportedItems = () => {
       `Do you want to delete "${report?.productName}"s report?`
     );
     if (isConfirm) {
-      fetch(
-        `https://b612-used-products-resale-server-side-faizul-osman.vercel.app/reports/${report?._id}`,
-        {
-          method: "DELETE",
-          headers: {
-            authorization: `bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
+      fetch(`http://localhost:5000/reports/${report?._id}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
