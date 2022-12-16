@@ -19,7 +19,11 @@ const SingleProduct = ({ product, isBuyer, setProduct }) => {
   return (
     <div key={product?._id} className="card bg-base-100 shadow-xl">
       <figure>
-        <img className="w-full h-[280px]" src={product?.img} alt="Shoes" />
+        <img
+          className="w-full h-[280px] duration-500 transform hover:scale-110"
+          src={product?.img}
+          alt="Shoes"
+        />
       </figure>
       <div className="card-body">
         <div className="flex justify-between items-center mb-3">

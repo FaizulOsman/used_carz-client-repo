@@ -24,7 +24,11 @@ const Categories = () => {
         {categories?.map((category) => (
           <Link key={category?._id} to={`/category/${category?._id}`}>
             <div className="p-8 border rounded-lg shadow-xl hover:bg-base-200 duration-300">
-              <img className="w-full h-56" src={category?.img} alt="" />
+              <img
+                className="w-full h-56 duration-500 transform hover:scale-110"
+                src={category?.img}
+                alt=""
+              />
               <h4 className="text-xl font-semibold text-primary text-center">
                 {category?.categoryName}
               </h4>
