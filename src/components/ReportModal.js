@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
+import useBuyer from "../hooks/useBuyer";
 
 const ReportModal = ({ product, setProduct }) => {
   const { user } = useContext(AuthContext);
+  const [isBuyer] = useBuyer(user?.email);
+
   const handleReport = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -21,14 +25,17 @@ const ReportModal = ({ product, setProduct }) => {
       description,
     };
 
-    fetch("https://b612-used-products-resale-server-side-faizul-osman.vercel.app/reports", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify(report),
-    })
+    fetch(
+      "https://b612-used-products-resale-server-side-faizul-osman.vercel.app/reports",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(report),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
@@ -69,9 +76,26 @@ const ReportModal = ({ product, setProduct }) => {
                 ></textarea>
               </div>
               <div className="form-control mt-6">
-                <button type="submit" className="btn btn-primary btn-outline">
-                  Submit
-                </button>
+                {isBuyer ? (
+                  <button type="submit" className="btn btn-primary btn-outline">
+                    Submit
+                  </button>
+                ) : (
+                  <div className="text-center mt-2">
+                    <p>Only buyers can report</p>
+                    <p>
+                      {" "}
+                      Please{" "}
+                      <Link
+                        to="/register"
+                        className="badge badge-primary text-white"
+                      >
+                        Register
+                      </Link>{" "}
+                      as buyer
+                    </p>
+                  </div>
+                )}
               </div>
             </form>
           </div>

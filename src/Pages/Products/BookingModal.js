@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useBuyer from "../../hooks/useBuyer";
 
 const BookingModal = ({ setProduct, product, refetch }) => {
   const { productName, resalePrice, sellerEmail, img, _id } = product;
   const { user } = useContext(AuthContext);
+  const [isBuyer] = useBuyer(user?.email);
 
   const { data: bookings = [] } = useQuery({
     queryKey: ["bookings"],
@@ -123,17 +126,38 @@ const BookingModal = ({ setProduct, product, refetch }) => {
                   className="input input-bordered"
                 />
               </div>
-              <div className="form-control mt-6">
-                {!booked.length > 0 ? (
-                  <button type="submit" className="btn btn-primary btn-outline">
-                    Submit
-                  </button>
-                ) : (
-                  <p className="btn btn-error" disabled>
-                    Already Booked
+
+              {isBuyer ? (
+                <div className="form-control mt-6">
+                  {!booked.length > 0 ? (
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-outline"
+                    >
+                      Submit
+                    </button>
+                  ) : (
+                    <p className="btn btn-error" disabled>
+                      Already Booked
+                    </p>
+                  )}
+                </div>
+              ) : (
+                <div className="text-center mt-2">
+                  <p>Only buyers can book any product</p>
+                  <p>
+                    {" "}
+                    Please{" "}
+                    <Link
+                      to="/register"
+                      className="badge badge-primary text-white"
+                    >
+                      Register
+                    </Link>{" "}
+                    as buyer
                   </p>
-                )}
-              </div>
+                </div>
+              )}
             </form>
           </div>
         </div>

@@ -86,17 +86,15 @@ const SingleProduct = ({ product, isBuyer, setProduct }) => {
           </div>
           <div>
             <div>
-              {isBuyer && (
-                <label
-                  onClick={() => setProduct(product)}
-                  htmlFor="report-modal"
-                  className="badge badge-error hover:bg-red-600 text-white mb-1"
-                >
-                  Report
-                </label>
-              )}
+              <label
+                onClick={() => setProduct(product)}
+                htmlFor="report-modal"
+                className="badge badge-error hover:bg-red-600 text-white mb-1"
+              >
+                Report
+              </label>
               <div>
-                {isBuyer && product?.status !== "sold" && (
+                {product?.status !== "sold" && (
                   <label
                     onClick={() => setProduct(product)}
                     htmlFor="booking-modal"
