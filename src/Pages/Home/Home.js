@@ -3,7 +3,7 @@ import AdvertisedItems from "./AdvertisedItems";
 import ArticlesAndTips from "./ArticlesAndTips";
 import Banner from "./Banner";
 import Categories from "./Categories";
-import UsedCarsNearYou from "./UsedCarsNearYou";
+import SearchByType from "./SearchByType";
 
 const Home = () => {
   return (
@@ -11,7 +11,7 @@ const Home = () => {
       <Banner></Banner>
       <AdvertisedItems></AdvertisedItems>
       <Categories></Categories>
-      <UsedCarsNearYou></UsedCarsNearYou>
+      <SearchByType></SearchByType>
       <ArticlesAndTips></ArticlesAndTips>
     </div>
   );

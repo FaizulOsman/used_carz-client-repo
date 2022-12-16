@@ -24,12 +24,12 @@ const Banner = () => {
         </h3>
       </div>
 
-      <div className="border-4 bg-base-100 mt-10 lg:-mt-24 lg:w-8/12 mx-auto rounded-lg p-10">
-        <h3 className="text-3xl font-semibold text-center text-primary">
+      <div className="border-4 bg-base-100 mt-10 lg:-mt-24 lg:w-8/12 mx-auto rounded-lg">
+        <h3 className="text-3xl font-semibold text-center text-primary mt-5">
           Tell us what you're looking for
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center mt-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-center mt-5 px-10 pb-10">
           <select className="select select-bordered w-full">
             <option>Select a Make</option>
             <option>Lamborghini</option>
@@ -50,6 +50,21 @@ const Banner = () => {
           <PrimaryButton classes="w-full px-8 py-3 font-semibold rounded-md bg-gray-900 hover:bg-gray-700 hover:text-white text-gray-100">
             Let's Go
           </PrimaryButton>
+        </div>
+
+        <div className="border-t bg-gray-100 p-4 flex flex-wrap justify-around gap-3">
+          <button className="p-2 border bg-white text-primary font-semibold">
+            Browse by Price or Payments
+          </button>
+          <button className="p-2 border bg-white text-primary font-semibold">
+            Browse by Brand
+          </button>
+          <button className="p-2 border bg-white text-primary font-semibold">
+            See Cars Near You
+          </button>
+          <button className="p-2 border bg-white text-primary font-semibold">
+            Articles & Tips
+          </button>
         </div>
       </div>
     </div>

@@ -8,11 +8,11 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const ArticlesAndTips = () => {
   return (
-    <div className="w-11/12 max-w-[1400px] mx-auto mt-20">
+    <div className="w-11/12 max-w-[1400px] mx-auto mt-28">
       <h2 className="text-4xl font-bold text-center text-secondary">
         Articles & Tips
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-20">
         <div className="border rounded-md">
           <img className="w-full h-52" src={ProsAndCons} alt="" />
           <div className="pl-3 mt-3">
