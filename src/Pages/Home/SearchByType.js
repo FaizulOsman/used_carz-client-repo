@@ -17,10 +17,11 @@ import bodytype8 from "../../assets/images/bodytype8.png";
 const SearchByType = () => {
   return (
     <div className="w-11/12 max-w-[1400px] mx-auto mt-28">
-      <h2 className="text-4xl font-bold text-center text-secondary">
-        Search By Type
-      </h2>
-
+      <div data-aos="flip-right">
+        <h2 className="text-4xl font-bold text-center text-secondary">
+          Search By Type
+        </h2>
+      </div>
       <div className="mt-20">
         <Swiper
           slidesPerView="auto"
@@ -54,7 +55,7 @@ const SearchByType = () => {
           className="mySwiper mb-20"
         >
           <SwiperSlide>
-            <div className="text-center">
+            <div data-aos="fade-left" className="text-center">
               <img
                 className="w-full transform hover:scale-110 duration-300"
                 src={bodytype1}
@@ -64,7 +65,7 @@ const SearchByType = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="text-center">
+            <div data-aos="fade-left" className="text-center">
               <img
                 className="w-full transform hover:scale-110 duration-300"
                 src={bodytype2}
@@ -74,7 +75,7 @@ const SearchByType = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="text-center">
+            <div data-aos="fade-left" className="text-center">
               <img
                 className="w-full transform hover:scale-110 duration-300"
                 src={bodytype3}
@@ -84,7 +85,7 @@ const SearchByType = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="text-center">
+            <div data-aos="fade-left" className="text-center">
               <img
                 className="w-full transform hover:scale-110 duration-300"
                 src={bodytype4}
@@ -94,7 +95,7 @@ const SearchByType = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="text-center">
+            <div data-aos="fade-left" className="text-center">
               <img
                 className="w-full transform hover:scale-110 duration-300"
                 src={bodytype5}
@@ -104,7 +105,7 @@ const SearchByType = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="text-center">
+            <div data-aos="fade-left" className="text-center">
               <img
                 className="w-full transform hover:scale-110 duration-300"
                 src={bodytype6}
@@ -114,7 +115,7 @@ const SearchByType = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="text-center">
+            <div data-aos="fade-left" className="text-center">
               <img
                 className="w-full transform hover:scale-110 duration-300"
                 src={bodytype7}
@@ -124,7 +125,7 @@ const SearchByType = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div className="text-center">
+            <div data-aos="fade-left" className="text-center">
               <img
                 className="w-full transform hover:scale-110 duration-300"
                 src={bodytype8}

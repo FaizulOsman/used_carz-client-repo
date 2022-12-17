@@ -28,9 +28,11 @@ const AdvertisedItems = () => {
     <>
       {products.length > 0 && (
         <div className="w-11/12 max-w-[1400px] mx-auto my-28">
-          <h2 className="mb-10 text-4xl font-bold text-center text-secondary">
-            Advertised Items
-          </h2>
+          <div data-aos="flip-left">
+            <h2 className="mb-10 text-4xl font-bold text-center text-secondary">
+              Advertised Items
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
             {products?.map((product) => (
               <SingleProduct

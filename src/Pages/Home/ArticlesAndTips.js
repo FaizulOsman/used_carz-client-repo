@@ -9,11 +9,13 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 const ArticlesAndTips = () => {
   return (
     <div className="w-11/12 max-w-[1400px] mx-auto mt-28">
-      <h2 className="text-4xl font-bold text-center text-secondary">
-        Articles & Tips
-      </h2>
+      <div data-aos="flip-left">
+        <h2 className="text-4xl font-bold text-center text-secondary">
+          Articles & Tips
+        </h2>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-20">
-        <div className="border rounded-md">
+        <div className="border rounded-md" data-aos="fade-right">
           <img className="w-full h-52" src={ProsAndCons} alt="" />
           <div className="pl-3 mt-3">
             <h5 className="text-gray-600 text-xs font-semibold">
@@ -27,7 +29,7 @@ const ArticlesAndTips = () => {
             </button>
           </div>
         </div>
-        <div className="border rounded-md">
+        <div className="border rounded-md" data-aos="fade-up">
           <img className="w-full h-52" src={Batteries} alt="" />
           <div className="pl-3 mt-3">
             <h5 className="text-gray-600 text-xs font-semibold">
@@ -41,7 +43,7 @@ const ArticlesAndTips = () => {
             </button>
           </div>
         </div>
-        <div className="border rounded-md">
+        <div className="border rounded-md" data-aos="fade-up">
           <img className="w-full h-52" src={Distance} alt="" />
           <div className="pl-3 mt-3">
             <h5 className="text-gray-600 text-xs font-semibold">CAR TIPS</h5>
@@ -53,7 +55,7 @@ const ArticlesAndTips = () => {
             </button>
           </div>
         </div>
-        <div className="border rounded-md">
+        <div className="border rounded-md" data-aos="fade-left">
           <img className="w-full h-52" src={AWDvs4WD} alt="" />
           <div className="pl-3 mt-3">
             <h5 className="text-gray-600 text-sm font-semibold">

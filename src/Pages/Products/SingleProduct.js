@@ -17,7 +17,11 @@ const SingleProduct = ({ product, isBuyer, setProduct }) => {
   const yearsOfUse = thisYear - purchaseYear;
 
   return (
-    <div key={product?._id} className="card bg-base-100 shadow-xl">
+    <div
+      data-aos="fade-up"
+      key={product?._id}
+      className="card bg-base-100 shadow-xl"
+    >
       <figure>
         <img
           className="w-full h-[280px] duration-500 transform hover:scale-110"

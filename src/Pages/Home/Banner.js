@@ -24,7 +24,10 @@ const Banner = () => {
         </h3>
       </div>
 
-      <div className="border-4 bg-base-100 mt-10 lg:-mt-24 lg:w-8/12 mx-auto rounded-lg">
+      <div
+        data-aos="fade-up"
+        className="border-4 bg-base-100 mt-10 lg:-mt-24 lg:w-8/12 mx-auto rounded-lg"
+      >
         <h3 className="text-3xl font-semibold text-center text-primary mt-5">
           Tell us what you're looking for
         </h3>
