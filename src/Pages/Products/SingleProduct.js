@@ -20,7 +20,7 @@ const SingleProduct = ({ product, isBuyer, setProduct }) => {
     <div
       data-aos="fade-up"
       key={product?._id}
-      className="card bg-base-100 shadow-xl"
+      className="card bg-base-100 shadow-xl hover:bg-gray-100 hover:shadow-2xl"
     >
       <figure>
         <img

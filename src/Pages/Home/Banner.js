@@ -17,7 +17,7 @@ const Banner = () => {
           style={{
             textShadow: "0 8px 4px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.6)",
           }}
-          className="text-5xl text-center text-white pt-20 font-bold"
+          className="text-5xl text-center text-white pt-20 font-bold hover:tracking-widest duration-300"
         >
           Let's Find <br />
           Your Next Used Car

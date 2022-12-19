@@ -3,6 +3,7 @@ import AdvertisedItems from "./AdvertisedItems";
 import ArticlesAndTips from "./ArticlesAndTips";
 import Banner from "./Banner";
 import Categories from "./Categories";
+import CertifiedSection from "./CertifiedSection";
 import SearchByType from "./SearchByType";
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
       <Categories></Categories>
       <SearchByType></SearchByType>
       <ArticlesAndTips></ArticlesAndTips>
+      <CertifiedSection></CertifiedSection>
     </div>
   );
 };

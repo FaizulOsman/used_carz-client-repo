@@ -17,7 +17,7 @@ const ArticlesAndTips = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-20">
         <div className="border rounded-md" data-aos="fade-right">
           <img className="w-full h-52" src={ProsAndCons} alt="" />
-          <div className="pl-3 mt-3">
+          <div className="pl-3 mt-3 hover:scale-105 duration-300">
             <h5 className="text-gray-600 text-xs font-semibold">
               CAR BUYING TIPS
             </h5>
@@ -31,7 +31,7 @@ const ArticlesAndTips = () => {
         </div>
         <div className="border rounded-md" data-aos="fade-up">
           <img className="w-full h-52" src={Batteries} alt="" />
-          <div className="pl-3 mt-3">
+          <div className="pl-3 mt-3 hover:scale-105 duration-300">
             <h5 className="text-gray-600 text-xs font-semibold">
               CAR BUYING TIPS
             </h5>
@@ -45,7 +45,7 @@ const ArticlesAndTips = () => {
         </div>
         <div className="border rounded-md" data-aos="fade-up">
           <img className="w-full h-52" src={Distance} alt="" />
-          <div className="pl-3 mt-3">
+          <div className="pl-3 mt-3 hover:scale-105 duration-300">
             <h5 className="text-gray-600 text-xs font-semibold">CAR TIPS</h5>
             <h4 className="text-xl font-semibold my-4">
               How Many Miles Is Too High for a Used Car?
@@ -57,7 +57,7 @@ const ArticlesAndTips = () => {
         </div>
         <div className="border rounded-md" data-aos="fade-left">
           <img className="w-full h-52" src={AWDvs4WD} alt="" />
-          <div className="pl-3 mt-3">
+          <div className="pl-3 mt-3 hover:scale-105 duration-300">
             <h5 className="text-gray-600 text-sm font-semibold">
               CAR SHOPPING
             </h5>
