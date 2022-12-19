@@ -220,7 +220,7 @@ const Register = () => {
 
   return (
     <div className="relative flex justify-center items-center py-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 rounded-lg z-10 shadow-2xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 rounded-lg z-10 shadow-2xl hover:scale-110 duration-300">
         <div
           style={{
             background: `url(${carBG2})`,
@@ -372,7 +372,11 @@ const Register = () => {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <img className="w-full max-w-lg my-10 h-40" src={CarToRight} alt="" />
+          <img
+            className="w-full max-w-lg my-10 h-40 hover:scale-110 duration-300"
+            src={CarToRight}
+            alt=""
+          />
         </div>
       </div>
     </div>

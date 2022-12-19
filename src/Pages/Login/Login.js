@@ -206,7 +206,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center py-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 rounded-lg z-10 shadow-2xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 rounded-lg z-10 shadow-2xl hover:scale-110 duration-300">
         {/* <div className="flex justify-center items-center px-5">
           <img className="w-full max-w-lg my-10 h-40" src={CarToRight} alt="" />
         </div> */}
@@ -219,7 +219,11 @@ const Login = () => {
             backgroundRepeat: "no-repeat",
           }}
         >
-          <img className="w-full max-w-sm my-10 h-40" src={CarToRight} alt="" />
+          <img
+            className="w-full max-w-sm my-10 h-40 hover:scale-110 duration-300"
+            src={CarToRight}
+            alt=""
+          />
         </div>
         <div
           style={{
