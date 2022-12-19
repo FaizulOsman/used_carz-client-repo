@@ -17,11 +17,10 @@ const Categories = () => {
 
   return (
     <div className="w-11/12 max-w-[1400px] mx-auto mt-20">
-      <div data-aos="flip-left" className="relative flex justify-center">
+      <div data-aos="flip-left">
         <h2 className="text-center text-4xl font-bold mb-20 text-secondary">
           Categories
         </h2>
-        <span class="animate-ping absolute top-full inline-flex lg:h-40 lg:w-6/12 mt-20 rounded-full bg-sky-400 opacity-75"></span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {categories?.map((category) => (

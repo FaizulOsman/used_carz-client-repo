@@ -53,12 +53,12 @@ const CertifiedSection = () => {
         ))}
       </div>
       <div className="mt-4 text-center">
-        <btn className="text-primary font-bold cursor-pointer">
+        <p className="text-primary font-bold cursor-pointer">
           <span className="mr-2 hover:tracking-wider duration-300">
             Show All Certified Pre-Owned Programs
           </span>
           <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon>
-        </btn>
+        </p>
       </div>
     </div>
   );
